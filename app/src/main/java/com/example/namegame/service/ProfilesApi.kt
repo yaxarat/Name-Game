@@ -1,6 +1,6 @@
 package com.example.namegame.service
 
-import com.example.namegame.data.Profile
+import com.example.namegame.model.Profile
 import retrofit2.Call
 import retrofit2.http.GET
 

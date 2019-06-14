@@ -1,12 +1,11 @@
 package com.example.namegame
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.namegame.data.Profile
+import com.example.namegame.model.Profile
 import com.example.namegame.service.ProfilesApi
 import kotlinx.android.synthetic.main.fragment_game.*
 import retrofit2.Call

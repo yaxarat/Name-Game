@@ -1,4 +1,4 @@
-package com.example.namegame.data
+package com.example.namegame.model
 
 data class Headshot(
     val alt: String,
