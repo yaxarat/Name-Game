@@ -3,7 +3,6 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "people_table")
 data class Profile(
     @PrimaryKey
