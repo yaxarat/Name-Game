@@ -8,13 +8,11 @@ import com.example.namegame.model.Profile
 
 @Dao
 interface ProfileDao {
-    //TODO: Create random select function here.
-
     @Insert
-    suspend fun insert(profiles: List<Profile>)
+    fun insert(profile: Profile)
 
     @Update
-    suspend fun update(profiles: List<Profile>)
+    suspend fun update(profile: Profile)
 
     @Query("SELECT * FROM people_table;")
     fun getProfiles(): List<Profile>

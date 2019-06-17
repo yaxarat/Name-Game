@@ -15,20 +15,17 @@ abstract class ProfileRoomDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ProfileRoomDatabase? = null
 
-        fun getDatabase(context: Context): ProfileRoomDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
+        fun getDatabase(context: Context): ProfileRoomDatabase? {
+            if (INSTANCE == null){
+                synchronized(ProfileRoomDatabase::class){
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, ProfileRoomDatabase::class.java, "Profile_database").build()
+                }
             }
-            synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    ProfileRoomDatabase::class.java,
-                    "Profile_database"
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
+            return INSTANCE
+        }
+
+        fun destroyDataBase(){
+            INSTANCE = null
         }
     }
 }

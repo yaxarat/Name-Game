@@ -1,11 +1,14 @@
 package com.example.namegame
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.namegame.database.ProfileRoomDatabase
 import com.example.namegame.model.Profile
+import com.example.namegame.service.ProfileDao
 import com.example.namegame.service.ProfilesApi
 import kotlinx.android.synthetic.main.fragment_game.*
 import retrofit2.Call
@@ -20,6 +23,8 @@ class GameFragment : Fragment() {
         MoshiConverterFactory.create()).build()
     private val profilesApi: ProfilesApi = retrofit.create(ProfilesApi::class.java)
     private val call = profilesApi.profiles
+    private var db: ProfileRoomDatabase? = null
+    private var dao: ProfileDao? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,14 +44,28 @@ class GameFragment : Fragment() {
                     textViewTest.text = "Code: ${response.code()}"
                 } else {
                     val profiles: List<Profile> = response.body()!!
+                    db = ProfileRoomDatabase.getDatabase(activity!!.applicationContext)
+                    dao = db?.profileDao()
 
                     for (profile in profiles) {
+                        dao!!.insert(profile)
+                    }
+
+                    for (profile in db?.profileDao()?.getProfiles()!!) {
                         var content = ""
                         content += "First Name: " + profile.firstName + "\n"
                         content += "Last Name: " + profile.lastName + "\n\n"
 
                         textViewTest.append(content)
                     }
+
+//                    for (profile in profiles) {
+//                        var content = ""
+//                        content += "First Name: " + profile.firstName + "\n"
+//                        content += "Last Name: " + profile.lastName + "\n\n"
+//
+//                        textViewTest.append(content)
+//                    }
                 }
             }
 

@@ -9,11 +9,15 @@ class ProfileRepository(private val profileDao: ProfileDao) {
 
     @WorkerThread
     suspend fun insert(profiles: List<Profile>) {
-        profileDao.insert(profiles)
+        for (profile in profiles) {
+            profileDao.insert(profile)
+        }
     }
 
     @WorkerThread
     suspend fun update(profiles: List<Profile>) {
-        profileDao.update(profiles)
+        for (profile in profiles) {
+            profileDao.insert(profile)
+        }
     }
 }
