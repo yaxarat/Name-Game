@@ -1,4 +1,4 @@
-package com.example.namegame.data
+package com.example.namegame.data.response
 
 data class Profile(
     var firstName: String,
