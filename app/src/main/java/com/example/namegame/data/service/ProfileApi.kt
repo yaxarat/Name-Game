@@ -8,9 +8,6 @@ import retrofit2.http.GET
 
 interface ProfileApi {
 
-//    @get:GET("profiles")
-//    val profiles: Call<List<Profile>>
-
     @GET("profiles")
     suspend fun getProfiles(): List<Profile>
 

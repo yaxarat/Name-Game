@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "profiles_table")
 data class Profile(
-    var firstName: String,
-    @Embedded(prefix = "headshot_")
-    var headshot: Headshot,
     @PrimaryKey(autoGenerate = false)
-    var id: String,
-    var lastName: String
+    val id: String,
+    val firstName: String,
+    val lastName: String
+//    @Embedded(prefix = "headshot_")
+//    val headshot: Headshot
 )

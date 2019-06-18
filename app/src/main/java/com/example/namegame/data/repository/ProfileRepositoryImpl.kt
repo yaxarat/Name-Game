@@ -33,8 +33,8 @@ class ProfileRepositoryImpl(private val profileDao: ProfileDao, private val prof
     }
 
     private suspend fun initProfileData() {
-        if (isFetchNeeded(ZonedDateTime.now())) {
-            Log.d("tag", "fetched")
+        // TODO: fix date based fetch system
+        if (isFetchNeeded(ZonedDateTime.now().minusDays(2))) {
             profileDataSource.fetchProfiles()
         }
     }
