@@ -1,6 +1,7 @@
 package com.example.namegame.data.service
 
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,5 +14,5 @@ interface ProfileDao {
     fun upsert(profile: Profile)
 
     @Query("SELECT * FROM profiles_table LIMIT 6")
-    fun getFirstSixProfiles(): List<Profile>
+    fun getFirstSixProfiles(): LiveData<List<Profile>>
 }
