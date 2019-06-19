@@ -11,6 +11,7 @@ class GameViewModel(profileRepository: ProfileRepository) : ViewModel() {
     private val repository = profileRepository
     lateinit var profiles: Deferred<LiveData<List<Profile>>>
     var answerIndex = 0
+    var score = 0
 
     init {
         getNewProfiles()

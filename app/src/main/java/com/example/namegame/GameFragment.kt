@@ -1,27 +1,21 @@
 package com.example.namegame
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.namegame.data.entity.Profile
 import com.example.namegame.viewmodel.GameViewModel
 import com.example.namegame.viewmodel.GameViewModelFactory
 import kotlinx.android.synthetic.main.fragment_game.*
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-
-
 
 class GameFragment : ScopedFragment(), KodeinAware {
     override val kodein by kodein()
@@ -53,8 +47,6 @@ class GameFragment : ScopedFragment(), KodeinAware {
     private fun bindUI() = launch {
         val profiles = viewModel.profiles.await()
         randomInt = viewModel.answerIndex
-        Log.d("tag", "$randomInt")
-
         val imageViews = arrayOf<ImageView>(
             imageViewHeadshot1,
             imageViewHeadshot2,
@@ -93,11 +85,15 @@ class GameFragment : ScopedFragment(), KodeinAware {
 
     private fun checkAnswer(choice: Int) {
         if (choice == randomInt) {
-            Log.d("tag", "correct!")
+            //TODO: Correct reaction
             getNewProfiles()
             bindUI()
+            viewModel.score ++
+            textViewScore.text = viewModel.score.toString()
         } else {
-            Log.d("tag", "incorrect!")
+            viewModel.score --
+            textViewScore.text = viewModel.score.toString()
+            //TODO: Incorrect reaction
         }
     }
 }
