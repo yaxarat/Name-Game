@@ -5,13 +5,25 @@ import androidx.lifecycle.ViewModel
 import com.example.namegame.data.entity.Profile
 import com.example.namegame.data.repository.ProfileRepository
 import com.example.namegame.delegate.lazyDeferred
+import kotlinx.coroutines.Deferred
 
 class GameViewModel(profileRepository: ProfileRepository) : ViewModel() {
     private val repository = profileRepository
-    val randomInt = (0..5).random()
+    lateinit var profiles: Deferred<LiveData<List<Profile>>>
+    var answerIndex = 0
 
-    suspend fun getNewProfiles(): LiveData<List<Profile>> {
+    init {
+        getNewProfiles()
+        getNewAnswerIndex()
+    }
+
+    fun getNewProfiles() {
         val profile by lazyDeferred {repository.getProfiles()}
-        return profile.await()
+        profiles = profile
+    }
+
+    fun getNewAnswerIndex(){
+        val randomInt = (0..5).random()
+        answerIndex = randomInt
     }
 }

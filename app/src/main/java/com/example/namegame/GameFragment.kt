@@ -15,6 +15,7 @@ import com.example.namegame.data.entity.Profile
 import com.example.namegame.viewmodel.GameViewModel
 import com.example.namegame.viewmodel.GameViewModelFactory
 import kotlinx.android.synthetic.main.fragment_game.*
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -50,8 +51,9 @@ class GameFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() = launch {
-        val profiles = viewModel.getNewProfiles()
-        randomInt = viewModel.randomInt
+        val profiles = viewModel.profiles.await()
+        randomInt = viewModel.answerIndex
+        Log.d("tag", "$randomInt")
 
         val imageViews = arrayOf<ImageView>(
             imageViewHeadshot1,
@@ -74,10 +76,16 @@ class GameFragment : ScopedFragment(), KodeinAware {
         })
     }
 
+    private fun getNewProfiles() = launch {
+        viewModel.getNewProfiles()
+        viewModel.getNewAnswerIndex()
+    }
+
     private fun loadImageFromUrl(url: String, view: ImageView) {
         Glide
             .with(this@GameFragment)
             .load(url)
+            .placeholder(R.drawable.wt_logo)
             .circleCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)
@@ -86,6 +94,7 @@ class GameFragment : ScopedFragment(), KodeinAware {
     private fun checkAnswer(choice: Int) {
         if (choice == randomInt) {
             Log.d("tag", "correct!")
+            getNewProfiles()
             bindUI()
         } else {
             Log.d("tag", "incorrect!")
