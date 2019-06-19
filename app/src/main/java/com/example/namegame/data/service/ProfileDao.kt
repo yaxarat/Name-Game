@@ -10,12 +10,11 @@ import com.example.namegame.data.entity.Profile
 
 @Dao
 interface ProfileDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun upsert(profile: Profile)
 
     // TODO: do selection filters here
 
-//    @Query("SELECT * FROM profiles_table WHERE id = :id")
     @Query("SELECT * FROM profiles_table WHERE id IN (SELECT id FROM profiles_table ORDER BY RANDOM() LIMIT 6)")
     fun getFirstSixProfiles(): LiveData<List<Profile>>
 }

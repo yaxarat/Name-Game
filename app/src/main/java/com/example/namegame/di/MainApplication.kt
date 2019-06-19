@@ -1,6 +1,7 @@
 package com.example.namegame.di
 
 import android.app.Application
+import android.content.res.Resources
 import com.example.namegame.data.database.ProfileDatabase
 import com.example.namegame.data.repository.ProfileRepository
 import com.example.namegame.data.repository.ProfileRepositoryImpl

@@ -27,6 +27,7 @@ class ProfileRepositoryImpl(private val profileDao: ProfileDao, private val prof
     private fun persistFetchedProfile(fetchedProfile: List<Profile>) {
         GlobalScope.launch(Dispatchers.IO) {
             for (profile in fetchedProfile) {
+                Log.d("tag", "$profile")
                 profileDao.upsert(profile)
             }
         }

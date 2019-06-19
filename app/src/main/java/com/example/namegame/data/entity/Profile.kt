@@ -9,7 +9,7 @@ data class Profile(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val firstName: String,
-    val lastName: String
-//    @Embedded(prefix = "headshot_")
-//    val headshot: Headshot
+    val lastName: String,
+    @Embedded(prefix = "headshot_")
+    val headshot: Headshot
 )

@@ -1,5 +1,6 @@
 package com.example.namegame
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+
+
 
 class GameFragment : ScopedFragment(), KodeinAware {
     override val kodein by kodein()
@@ -37,18 +40,13 @@ class GameFragment : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch {
         val profiles = viewModel.profile.await()
+        val rnds = viewModel.rnds
 
         profiles.observe(this@GameFragment, Observer {
-            if (it.isEmpty()) {Log.d("tag", "null here")
-                return@Observer}
+            if (it.isEmpty() || it.size < 6) {return@Observer}
 
-            for (profile in it) {
-                Log.d("tag", "not null here")
-                var content = ""
-                content += "First Name: " + profile.firstName + "\n"
-                content += "Last Name: " + profile.lastName + "\n\n"
-                textViewTest.append(content)
-            }
+            val name: String = it[rnds].firstName + " " + it[rnds].lastName + "/n" + it[rnds].headshot.url
+            textViewTest.text = resources.getString(R.string.game_profile_name, name)
         })
     }
 }

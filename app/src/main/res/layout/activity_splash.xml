@@ -10,8 +10,8 @@
 		tools:context=".SplashActivity">
 
 	<ImageView
-			android:layout_width="190dp"
-			android:layout_height="190dp" app:srcCompat="@drawable/wt_logo"
+			android:layout_width="250dp"
+			android:layout_height="250dp" app:srcCompat="@drawable/wt_logo"
 			android:id="@+id/imageView" app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
