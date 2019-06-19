@@ -16,5 +16,5 @@ interface ProfileDao {
     // TODO: do selection filters here
 
     @Query("SELECT * FROM profiles_table WHERE id IN (SELECT id FROM profiles_table ORDER BY RANDOM() LIMIT 6)")
-    fun getFirstSixProfiles(): LiveData<List<Profile>>
+    fun getSixProfiles(): LiveData<List<Profile>>
 }

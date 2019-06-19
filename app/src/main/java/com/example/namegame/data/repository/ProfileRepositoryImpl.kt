@@ -20,7 +20,7 @@ class ProfileRepositoryImpl(private val profileDao: ProfileDao, private val prof
     override suspend fun getProfiles(): LiveData<List<Profile>> {
         return withContext(Dispatchers.IO) {
             initProfileData()
-            return@withContext profileDao.getFirstSixProfiles()
+            return@withContext profileDao.getSixProfiles()
         }
     }
 
