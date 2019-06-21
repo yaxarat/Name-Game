@@ -23,6 +23,13 @@ class ProfileRepositoryImpl(private val profileDao: ProfileDao, private val prof
         }
     }
 
+    override suspend fun getAllProfiles(): LiveData<List<Profile>> {
+        return withContext(Dispatchers.IO) {
+            initProfileData()
+            return@withContext profileDao.getAllProfiles()
+        }
+    }
+
     private fun persistFetchedProfile(fetchedProfile: List<Profile>) {
         GlobalScope.launch(Dispatchers.IO) {
             for (profile in fetchedProfile) {

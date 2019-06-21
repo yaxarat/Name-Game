@@ -4,4 +4,8 @@
              android:id="@+id/learnFragment"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".LearnFragment"/>
+             tools:context=".LearnFragment">
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+</FrameLayout>

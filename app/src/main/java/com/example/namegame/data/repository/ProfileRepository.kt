@@ -5,4 +5,5 @@ import com.example.namegame.data.entity.Profile
 
 interface ProfileRepository {
     suspend fun getProfiles(): LiveData<List<Profile>>
+    suspend fun getAllProfiles(): LiveData<List<Profile>>
 }
