@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import kotlin.concurrent.thread
 
 class GameFragment : ScopedFragment(), KodeinAware {
     override val kodein by kodein()
@@ -24,6 +23,7 @@ class GameFragment : ScopedFragment(), KodeinAware {
     private lateinit var viewModel: GameViewModel
     private var randomInt = 0
     private lateinit var imageViews: Array<ImageView>
+    private var pickedIndex = mutableListOf<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,6 +71,7 @@ class GameFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun getNewProfiles() = launch {
+        pickedIndex.clear()
         viewModel.getNewProfiles()
         viewModel.getNewAnswerIndex()
         bindUI()
@@ -86,7 +87,10 @@ class GameFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun checkAnswer(choice: Int) {
-        viewModel.attempt ++
+        if (!pickedIndex.contains(choice)) {
+            pickedIndex.add(choice)
+            viewModel.attempt ++
+        }
 
         if (choice == randomInt) {
             revealChoice(choice, true)

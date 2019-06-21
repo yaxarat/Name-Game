@@ -11,6 +11,7 @@
             tools:layout="@layout/fragment_menu">
         <action android:id="@+id/action_menuFragment_to_gameFragment" app:destination="@id/gameFragment"/>
         <action android:id="@+id/action_menuFragment_to_settingFragment" app:destination="@id/settingFragment"/>
+        <action android:id="@+id/action_menuFragment_to_learnFragment" app:destination="@id/learnFragment"/>
     </fragment>
 
     <fragment android:id="@+id/gameFragment" android:name="com.example.namegame.GameFragment"
@@ -18,4 +19,6 @@
 
     <fragment android:id="@+id/settingFragment" android:name="com.example.namegame.SettingFragment"
               android:label="fragment_setting" tools:layout="@layout/fragment_setting"/>
+    <fragment android:id="@+id/learnFragment" android:name="com.example.namegame.LearnFragment"
+              android:label="fragment_learn" tools:layout="@layout/fragment_learn"/>
 </navigation>

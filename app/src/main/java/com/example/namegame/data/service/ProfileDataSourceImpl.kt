@@ -14,6 +14,7 @@ class ProfileDataSourceImpl(private val profileApi: ProfileApi) : ProfileDataSou
             val fetchedProfile = profileApi.getProfiles()
             _downloadedProfiles.postValue(fetchedProfile)
         } catch (e: NoConnectivityException) {
+            // Todo: handle no network after the game has been started
             Log.e("Error", "No internet connection", e)
         }
     }

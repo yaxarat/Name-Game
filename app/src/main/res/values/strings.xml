@@ -6,5 +6,7 @@
     <string name="game_profile_name">%1$s</string>
     <string name="game_score">%1$d/%2$d</string>
 
+    <string name="error_menu_no_network">You need network connection to start!</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

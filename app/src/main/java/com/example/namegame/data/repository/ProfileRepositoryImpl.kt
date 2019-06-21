@@ -1,6 +1,5 @@
 package com.example.namegame.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.namegame.data.entity.Profile
 import com.example.namegame.data.service.ProfileDao
