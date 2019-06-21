@@ -16,12 +16,14 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import kotlin.concurrent.thread
 
 class GameFragment : ScopedFragment(), KodeinAware {
     override val kodein by kodein()
     private val viewModelFactory: GameViewModelFactory by instance()
     private lateinit var viewModel: GameViewModel
     private var randomInt = 0
+    private lateinit var imageViews: Array<ImageView>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +49,7 @@ class GameFragment : ScopedFragment(), KodeinAware {
     private fun bindUI() = launch {
         val profiles = viewModel.profiles.await()
         randomInt = viewModel.answerIndex
-        val imageViews = arrayOf<ImageView>(
+        imageViews = arrayOf(
             imageViewHeadshot1,
             imageViewHeadshot2,
             imageViewHeadshot3,
@@ -63,7 +65,7 @@ class GameFragment : ScopedFragment(), KodeinAware {
             textViewName.text = resources.getString(R.string.game_profile_name, name)
 
             for (n in 0 until it.size) {
-                loadImageFromUrl("https:" + it[n].headshot.url, imageViews[n])
+                loadImageFromSource("https:" + it[n].headshot.url, imageViews[n])
             }
         })
     }
@@ -71,29 +73,37 @@ class GameFragment : ScopedFragment(), KodeinAware {
     private fun getNewProfiles() = launch {
         viewModel.getNewProfiles()
         viewModel.getNewAnswerIndex()
+        bindUI()
     }
 
-    private fun loadImageFromUrl(url: String, view: ImageView) {
+    private fun loadImageFromSource(source: Any, view: ImageView) {
         Glide
             .with(this@GameFragment)
-            .load(url)
-            .placeholder(R.drawable.wt_logo)
+            .load(source)
             .circleCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)
     }
 
     private fun checkAnswer(choice: Int) {
+        viewModel.attempt ++
+
         if (choice == randomInt) {
-            //TODO: Correct reaction
+            revealChoice(choice, true)
             getNewProfiles()
-            bindUI()
             viewModel.score ++
-            textViewScore.text = viewModel.score.toString()
+            textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
         } else {
-            viewModel.score --
-            textViewScore.text = viewModel.score.toString()
-            //TODO: Incorrect reaction
+            revealChoice(choice, false)
+            textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
+        }
+    }
+
+    private fun revealChoice(choice: Int, isCorrect: Boolean) {
+        if (isCorrect) {
+            loadImageFromSource(R.drawable.ic_check, imageViews[choice])
+        } else {
+            loadImageFromSource(R.drawable.ic_close, imageViews[choice])
         }
     }
 }

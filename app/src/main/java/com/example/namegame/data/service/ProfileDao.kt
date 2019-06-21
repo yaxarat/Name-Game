@@ -13,8 +13,6 @@ interface ProfileDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun upsert(profile: Profile)
 
-    // TODO: do selection filters here
-
     @Query("SELECT * FROM profiles_table WHERE id IN (SELECT id FROM profiles_table ORDER BY RANDOM() LIMIT 6)")
     fun getSixProfiles(): LiveData<List<Profile>>
 }

@@ -12,6 +12,7 @@ class GameViewModel(profileRepository: ProfileRepository) : ViewModel() {
     lateinit var profiles: Deferred<LiveData<List<Profile>>>
     var answerIndex = 0
     var score = 0
+    var attempt = 0
 
     init {
         getNewProfiles()
