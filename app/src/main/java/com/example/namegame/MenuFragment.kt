@@ -34,12 +34,12 @@ class MenuFragment : Fragment() {
         }
         learn_button.setOnClickListener {
             if (isOnline()) {
-                activity?.supportFragmentManager?.beginTransaction()?.addToBackStack("")?.replace(R.id.host_fragment, GameFragment())?.commit()
+                activity?.supportFragmentManager?.beginTransaction()?.addToBackStack("")?.replace(R.id.host_fragment, LearnFragment())?.commit()
             } else {
                 Toast.makeText(activity, R.string.error_menu_no_network, Toast.LENGTH_LONG).show()
             }
         }
-        setting_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_settingFragment))
+        //setting_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_settingFragment))
     }
 
     private fun isOnline(): Boolean {

@@ -13,10 +13,10 @@
             android:layout_height="75dp"
             android:text="@string/menu_start"
             android:fontFamily="@font/roboto_mono_medium" android:textSize="18sp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/learn_button"
             app:layout_constraintStart_toStartOf="@+id/learn_button"
-            app:layout_constraintEnd_toEndOf="@+id/learn_button"/>
+            app:layout_constraintEnd_toEndOf="@+id/learn_button"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
 
     <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -28,7 +28,8 @@
             android:fontFamily="@font/roboto_mono_medium" android:textSize="18sp"
             android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.65999997"/>
 
     <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -42,5 +43,12 @@
             app:layout_constraintTop_toBottomOf="@+id/learn_button"
             app:layout_constraintStart_toStartOf="@+id/learn_button"
             app:layout_constraintEnd_toEndOf="@+id/learn_button"/>
+    <ImageView
+            android:src="@drawable/wt_logo_menu"
+            android:layout_width="300dp"
+            android:layout_height="136dp"
+            android:id="@+id/imageView2" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="80dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

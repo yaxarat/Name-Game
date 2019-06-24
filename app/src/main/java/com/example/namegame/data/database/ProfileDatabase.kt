@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.namegame.data.entity.Profile
 import com.example.namegame.data.service.ProfileDao
 
-@Database(entities = [Profile::class], version = 22)
+@Database(entities = [Profile::class], version = 23)
 abstract class ProfileDatabase : RoomDatabase() {
     abstract fun profilesDao(): ProfileDao
 
