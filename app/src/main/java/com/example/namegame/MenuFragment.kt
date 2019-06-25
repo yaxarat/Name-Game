@@ -10,7 +10,6 @@ import com.example.namegame.utility.FragmentTransaction
 import com.example.namegame.utility.Network
 import kotlinx.android.synthetic.main.fragment_menu.*
 
-
 class MenuFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

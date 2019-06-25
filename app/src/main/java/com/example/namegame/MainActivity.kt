@@ -1,25 +1,19 @@
 package com.example.namegame
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.app.ActivityCompat
+import com.example.namegame.utility.Permission
 
 class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        checkPermissions()
-
+        requestPermissions()
         supportFragmentManager.beginTransaction().replace(R.id.host_fragment, MenuFragment()).commit()
     }
 
-    // Start of runtime permission check functions
-    private fun checkPermissions() {
+    private fun requestPermissions() {
         val allPermissionStatus = 1
         val permissions = arrayOf(
             android.Manifest.permission.INTERNET,
@@ -29,22 +23,9 @@ class MainActivity : AppCompatActivity(){
         )
 
         for (permission in permissions) {
-            if (!hasPermissions(this, permission)) {
+            if (!Permission.checkPermissions(this, permission)) {
                 requestPermissions(permissions, allPermissionStatus)
             }
         }
-    }
-
-    @SuppressLint("ObsoleteSdkInt")
-    private fun hasPermissions(context: Context?, vararg permissions: String): Boolean {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null) {
-            for (permission in permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false
-                }
-            }
-        }
-        return true
     }
 }

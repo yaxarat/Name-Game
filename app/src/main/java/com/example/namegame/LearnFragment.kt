@@ -1,6 +1,5 @@
 package com.example.namegame
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,14 +32,12 @@ class LearnFragment : ScopedFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(LearnViewModel::class.java)
+        recyclerViewList.adapter = RecyclerViewAdapter(emptyList()) // set an empty adapter first to avoid "No adapter attached" error
         bindUI()
     }
 
     private fun bindUI() = launch {
-        val profiles = viewModel.profiles.await()
-
-        profiles.observe(this@LearnFragment, Observer {
-            recyclerViewList.layoutManager = LinearLayoutManager(activity)
+        viewModel.profiles.await().observe(this@LearnFragment, Observer {
             recyclerViewList.adapter = RecyclerViewAdapter(it)
         })
     }

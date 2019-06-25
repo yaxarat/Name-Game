@@ -1,16 +1,12 @@
 package com.example.namegame.adapter
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.namegame.R
 import com.example.namegame.data.entity.Profile
+import com.example.namegame.utility.Media
 import kotlinx.android.synthetic.main.learn_list_layout.view.*
 
 class RecyclerViewAdapter (profilesList: List<Profile>): RecyclerView.Adapter<LearnListViewHolder>() {
@@ -34,19 +30,8 @@ class RecyclerViewAdapter (profilesList: List<Profile>): RecyclerView.Adapter<Le
 
         holder.itemView.textViewName.text = profileName
         holder.itemView.textViewPosition.text = jobTitle
-        loadImageFromSource(pictureUrl, imageView, holder.itemView.context)
+        Media.loadImageFromSource(pictureUrl, imageView, holder.itemView.context)
     }
-    private fun loadImageFromSource(source: Any, view: ImageView, context: Context) {
-        Log.d("tag", "$source")
-        Glide
-            .with(context)
-            .load(source)
-            .circleCrop()
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(view)
-    }
-
-
 }
 
 class LearnListViewHolder(view: View): RecyclerView.ViewHolder(view)
