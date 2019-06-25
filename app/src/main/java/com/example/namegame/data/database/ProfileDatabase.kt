@@ -22,4 +22,6 @@ abstract class ProfileDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext, ProfileDatabase::class.java, "profile.db").fallbackToDestructiveMigration().build()
     }
+
+
 }

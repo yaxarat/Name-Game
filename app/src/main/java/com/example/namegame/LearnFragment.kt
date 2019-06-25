@@ -44,6 +44,4 @@ class LearnFragment : ScopedFragment(), KodeinAware {
             recyclerViewList.adapter = RecyclerViewAdapter(it)
         })
     }
-
-
 }

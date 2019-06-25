@@ -93,21 +93,11 @@ class GameFragment : ScopedFragment(), KodeinAware {
         }
 
         if (choice == randomInt) {
-            revealChoice(choice, true)
             getNewProfiles()
             viewModel.score ++
-            textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
-        } else {
-            revealChoice(choice, false)
-            textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
         }
-    }
 
-    private fun revealChoice(choice: Int, isCorrect: Boolean) {
-        if (isCorrect) {
-            loadImageFromSource(R.drawable.ic_check, imageViews[choice])
-        } else {
-            loadImageFromSource(R.drawable.ic_close, imageViews[choice])
-        }
+        loadImageFromSource(if (choice == randomInt) R.drawable.ic_check else R.drawable.ic_close , imageViews[choice])
+        textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
     }
 }

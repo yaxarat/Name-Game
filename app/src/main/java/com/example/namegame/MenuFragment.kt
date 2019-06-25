@@ -1,24 +1,19 @@
 package com.example.namegame
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import com.example.namegame.utility.FragmentTransaction
+import com.example.namegame.utility.Network
 import kotlinx.android.synthetic.main.fragment_menu.*
 
 
 class MenuFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_menu, container, false)
     }
 
@@ -26,25 +21,21 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         start_button.setOnClickListener {
-            if (isOnline() ) {
-                activity?.supportFragmentManager?.beginTransaction()?.addToBackStack("")?.replace(R.id.host_fragment, GameFragment())?.commit()
-            } else {
-                Toast.makeText(activity, R.string.error_menu_no_network, Toast.LENGTH_LONG).show()
-            }
+            beginTransactionTo(GameFragment())
         }
         learn_button.setOnClickListener {
-            if (isOnline()) {
-                activity?.supportFragmentManager?.beginTransaction()?.addToBackStack("")?.replace(R.id.host_fragment, LearnFragment())?.commit()
-            } else {
-                Toast.makeText(activity, R.string.error_menu_no_network, Toast.LENGTH_LONG).show()
-            }
+            beginTransactionTo(LearnFragment())
         }
-        //setting_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_menuFragment_to_settingFragment))
+        setting_button.setOnClickListener {
+            FragmentTransaction.beginTransaction(activity, R.id.host_fragment, LearnFragment())
+        }
     }
 
-    private fun isOnline(): Boolean {
-        val connectivityManager = activity!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivityManager.activeNetwork
-        return network != null
+    private fun beginTransactionTo(destinationFragment: Fragment) {
+        if (Network.isOnline(activity!!)) {
+            FragmentTransaction.beginTransaction(activity, R.id.host_fragment, destinationFragment)
+        } else {
+            Toast.makeText(activity, R.string.error_menu_no_network, Toast.LENGTH_LONG).show()
+        }
     }
 }
