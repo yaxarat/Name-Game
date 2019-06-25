@@ -67,14 +67,14 @@ class GameFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun checkAnswer(choice: Int) {
-        if (choice == correctProfile) {
-            getNewProfiles()
-            viewModel.score++
-        }
-
         imageViews[choice].isClickable = false
         viewModel.attempt++
         Media.loadImageFromSource(if (choice == correctProfile) R.drawable.ic_check else R.drawable.ic_close, imageViews[choice], this@GameFragment.requireContext())
+
+        if (choice == correctProfile) {
+            viewModel.score++
+            getNewProfiles()
+        }
         textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
     }
 

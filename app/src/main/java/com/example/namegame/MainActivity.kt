@@ -11,7 +11,11 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         requestPermissions()
-        FragmentTransaction.beginTransaction(this, R.id.host_fragment, MenuFragment())
+
+        //  using the same Fragment rather than recreating a new one
+        if (savedInstanceState == null) {
+            FragmentTransaction.beginTransaction(this, R.id.host_fragment, MenuFragment())
+        }
     }
 
     private fun requestPermissions() {
