@@ -5,8 +5,11 @@ import androidx.fragment.app.FragmentActivity
 
 class FragmentTransaction {
     companion object {
-        fun beginTransaction(activity: FragmentActivity?, fromFragment: Int, toFragment: Fragment) {
+        fun beginTransactionWithBackStack(activity: FragmentActivity?, fromFragment: Int, toFragment: Fragment) {
             activity?.supportFragmentManager?.beginTransaction()?.replace(fromFragment, toFragment)?.addToBackStack(null)?.commit()
+        }
+        fun beginTransaction(activity: FragmentActivity?, fromFragment: Int, toFragment: Fragment) {
+            activity?.supportFragmentManager?.beginTransaction()?.replace(fromFragment, toFragment)?.commit()
         }
     }
 }

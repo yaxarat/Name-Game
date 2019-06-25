@@ -21,8 +21,7 @@ class GameFragment : ScopedFragment(), KodeinAware {
     private val viewModelFactory: GameViewModelFactory by instance()
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
-    private var pickedIndex = mutableListOf<Int>()
-    private var answerProfile = 0
+    private var correctProfile = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_game, container, false)
@@ -41,53 +40,46 @@ class GameFragment : ScopedFragment(), KodeinAware {
             imageViewHeadshot6
         )
 
-        bindUI()
+        updateUI()
 
-        imageViews[0].setOnClickListener { checkAnswer(0) }
-        imageViews[1].setOnClickListener { checkAnswer(1) }
-        imageViews[2].setOnClickListener { checkAnswer(2) }
-        imageViews[3].setOnClickListener { checkAnswer(3) }
-        imageViews[4].setOnClickListener { checkAnswer(4) }
-        imageViews[5].setOnClickListener { checkAnswer(5) }
+        for (n in 0 until 6) {
+            imageViews[n].setOnClickListener{checkAnswer(n)}
+        }
     }
 
-    private fun bindUI() = launch {
+    private fun updateUI() = launch {
         val profiles = viewModel.profiles.await()
-        answerProfile = viewModel.answerIndex
 
         profiles.observe(this@GameFragment, Observer {
             if (it.isEmpty() || it.size < 6) {
                 return@Observer
             }
 
-            val name: String = it[answerProfile].firstName + " " + it[answerProfile].lastName
+            correctProfile = viewModel.answerIndex
+            val name: String = it[correctProfile].firstName + " " + it[correctProfile].lastName
             textViewName.text = resources.getString(R.string.game_profile_name, name)
 
-            for (n in 0 until it.size) {
+            for (n in 0 until 6) {
+                imageViews[n].isClickable = true
                 Media.loadImageFromSource("https:" + it[n].headshot.url, imageViews[n], this@GameFragment.requireContext())
             }
         })
     }
 
     private fun checkAnswer(choice: Int) {
-        if (!pickedIndex.contains(choice)) {
-            pickedIndex.add(choice)
-            viewModel.attempt++
-        }
-
-        if (choice == answerProfile) {
+        if (choice == correctProfile) {
             getNewProfiles()
             viewModel.score++
         }
 
-        Media.loadImageFromSource(if (choice == answerProfile) R.drawable.ic_check else R.drawable.ic_close, imageViews[choice], this@GameFragment.requireContext())
+        imageViews[choice].isClickable = false
+        viewModel.attempt++
+        Media.loadImageFromSource(if (choice == correctProfile) R.drawable.ic_check else R.drawable.ic_close, imageViews[choice], this@GameFragment.requireContext())
         textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
     }
 
     private fun getNewProfiles() = launch {
-        pickedIndex.clear()
-        viewModel.getNewProfiles()
-        viewModel.getNewAnswerIndex()
-        bindUI()
+        viewModel.newRound()
+        updateUI()
     }
 }

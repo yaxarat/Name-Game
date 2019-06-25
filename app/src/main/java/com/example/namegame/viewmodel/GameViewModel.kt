@@ -15,17 +15,14 @@ class GameViewModel(profileRepository: ProfileRepository) : ViewModel() {
     var attempt = 0
 
     init {
-        getNewProfiles()
-        getNewAnswerIndex()
+        newRound()
     }
 
-    fun getNewProfiles() {
+    fun newRound() {
         val profile by lazyDeferred {repository.getProfiles()}
-        profiles = profile
-    }
-
-    fun getNewAnswerIndex(){
         val randomInt = (0..5).random()
+
+        profiles = profile
         answerIndex = randomInt
     }
 }

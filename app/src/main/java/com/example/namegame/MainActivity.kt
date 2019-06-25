@@ -2,6 +2,7 @@ package com.example.namegame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.namegame.utility.FragmentTransaction
 import com.example.namegame.utility.Permission
 
 class MainActivity : AppCompatActivity(){
@@ -10,11 +11,10 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         requestPermissions()
-        supportFragmentManager.beginTransaction().replace(R.id.host_fragment, MenuFragment()).commit()
+        FragmentTransaction.beginTransaction(this, R.id.host_fragment, MenuFragment())
     }
 
     private fun requestPermissions() {
-        val allPermissionStatus = 1
         val permissions = arrayOf(
             android.Manifest.permission.INTERNET,
             android.Manifest.permission.ACCESS_NETWORK_STATE,
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(){
 
         for (permission in permissions) {
             if (!Permission.checkPermissions(this, permission)) {
-                requestPermissions(permissions, allPermissionStatus)
+                requestPermissions(permissions, 1)
             }
         }
     }

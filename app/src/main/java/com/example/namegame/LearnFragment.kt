@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.namegame.adapter.RecyclerViewAdapter
 import com.example.namegame.viewmodel.LearnViewModel
 import com.example.namegame.viewmodel.LearnViewModelFactory
@@ -33,10 +32,10 @@ class LearnFragment : ScopedFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(LearnViewModel::class.java)
         recyclerViewList.adapter = RecyclerViewAdapter(emptyList()) // set an empty adapter first to avoid "No adapter attached" error
-        bindUI()
+        updateUI()
     }
 
-    private fun bindUI() = launch {
+    private fun updateUI() = launch {
         viewModel.profiles.await().observe(this@LearnFragment, Observer {
             recyclerViewList.adapter = RecyclerViewAdapter(it)
         })

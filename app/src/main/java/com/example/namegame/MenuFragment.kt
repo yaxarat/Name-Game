@@ -26,13 +26,13 @@ class MenuFragment : Fragment() {
             beginTransactionTo(LearnFragment())
         }
         setting_button.setOnClickListener {
-            FragmentTransaction.beginTransaction(activity, R.id.host_fragment, LearnFragment())
+            FragmentTransaction.beginTransactionWithBackStack(activity, R.id.host_fragment, LearnFragment())
         }
     }
 
     private fun beginTransactionTo(destinationFragment: Fragment) {
         if (Network.isOnline(activity!!)) {
-            FragmentTransaction.beginTransaction(activity, R.id.host_fragment, destinationFragment)
+            FragmentTransaction.beginTransactionWithBackStack(activity, R.id.host_fragment, destinationFragment)
         } else {
             Toast.makeText(activity, R.string.error_menu_no_network, Toast.LENGTH_LONG).show()
         }
