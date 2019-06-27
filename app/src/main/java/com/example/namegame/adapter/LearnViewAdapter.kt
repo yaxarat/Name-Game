@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.namegame.R
+import com.example.namegame.adapter.holder.ProfileViewHolder
 import com.example.namegame.data.entity.Profile
 
 class LearnViewAdapter (profilesList: List<Profile>): RecyclerView.Adapter<ViewHolder>() {

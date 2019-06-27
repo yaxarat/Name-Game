@@ -1,4 +1,4 @@
-package com.example.namegame.adapter
+package com.example.namegame.adapter.holder
 
 import android.view.View
 import android.widget.ImageView

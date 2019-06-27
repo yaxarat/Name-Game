@@ -69,7 +69,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageViewHeadshot2"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewHeadshot2"/>
     <TextView
-            android:text="0"
+            tools:text="@string/game_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewScore" android:textSize="36sp"

@@ -10,6 +10,7 @@ import kotlinx.coroutines.Deferred
 class GameViewModel(profileRepository: ProfileRepository) : ViewModel() {
     private val repository = profileRepository
     lateinit var profiles: Deferred<LiveData<List<Profile>>>
+    lateinit var clickable: HashMap<Int, Boolean>
     var answerIndex = 0
     var score = 0
     var attempt = 0
@@ -24,5 +25,13 @@ class GameViewModel(profileRepository: ProfileRepository) : ViewModel() {
 
         profiles = profile
         answerIndex = randomInt
+        clickable = hashMapOf(
+            0 to true,
+            1 to true,
+            2 to true,
+            3 to true,
+            4 to true,
+            5 to true
+        )
     }
 }

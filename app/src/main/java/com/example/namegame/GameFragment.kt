@@ -39,18 +39,16 @@ class GameFragment : ScopedFragment(), KodeinAware {
             imageViewHeadshot5,
             imageViewHeadshot6
         )
-
         updateUI()
-
         for (n in 0 until 6) {
             imageViews[n].setOnClickListener{checkAnswer(n)}
         }
     }
 
     private fun updateUI() = launch {
-        val profiles = viewModel.profiles.await()
+        textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
 
-        profiles.observe(this@GameFragment, Observer {
+        viewModel.profiles.await().observe(this@GameFragment, Observer {
             if (it.isEmpty() || it.size < 6) {
                 return@Observer
             }
@@ -60,22 +58,28 @@ class GameFragment : ScopedFragment(), KodeinAware {
             textViewName.text = resources.getString(R.string.game_profile_name, name)
 
             for (n in 0 until 6) {
-                imageViews[n].isClickable = true
-                Media.loadImageFromSource("https:" + it[n].headshot.url, imageViews[n], this@GameFragment.requireContext())
+                imageViews[n].isClickable = viewModel.clickable[n]!!
+                updateHeadshot(imageViews[n].isClickable, n, "https:" + it[n].headshot.url)
             }
         })
     }
 
     private fun checkAnswer(choice: Int) {
+        viewModel.clickable[choice] = false
         imageViews[choice].isClickable = false
         viewModel.attempt++
-        Media.loadImageFromSource(if (choice == correctProfile) R.drawable.ic_check else R.drawable.ic_close, imageViews[choice], this@GameFragment.requireContext())
 
         if (choice == correctProfile) {
             viewModel.score++
             getNewProfiles()
+        } else {
+            updateHeadshot(false, choice, "none")
         }
         textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
+    }
+
+    private fun updateHeadshot(correct: Boolean, index: Int, src: String) {
+        Media.loadImageFromSource(if (correct) src else R.drawable.ic_close, imageViews[index], this@GameFragment.requireContext())
     }
 
     private fun getNewProfiles() = launch {
