@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.namegame.adapter.RecyclerViewAdapter
+import com.example.namegame.adapter.LearnViewAdapter
 import com.example.namegame.viewmodel.LearnViewModel
 import com.example.namegame.viewmodel.LearnViewModelFactory
 import kotlinx.android.synthetic.main.fragment_learn.*
@@ -24,20 +24,19 @@ class LearnFragment : ScopedFragment(), KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_learn, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(LearnViewModel::class.java)
-        recyclerViewList.adapter = RecyclerViewAdapter(emptyList()) // set an empty adapter first to avoid "No adapter attached" error
+        recyclerViewList.adapter = LearnViewAdapter(emptyList()) // set an empty adapter first to avoid "No adapter attached" error
         updateUI()
     }
 
     private fun updateUI() = launch {
         viewModel.profiles.await().observe(this@LearnFragment, Observer {
-            recyclerViewList.adapter = RecyclerViewAdapter(it)
+            recyclerViewList.adapter = LearnViewAdapter(it)
         })
     }
 }
