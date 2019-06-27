@@ -52,7 +52,7 @@ class GameFragment : ScopedFragment(), KodeinAware {
             if (it.isEmpty() || it.size < 6) {
                 return@Observer
             }
-
+            progressBar.visibility = View.GONE
             correctProfile = viewModel.answerIndex
             val name: String = it[correctProfile].firstName + " " + it[correctProfile].lastName
             textViewName.text = resources.getString(R.string.game_profile_name, name)
