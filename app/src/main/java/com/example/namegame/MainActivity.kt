@@ -2,13 +2,14 @@ package com.example.namegame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.namegame.data.shared_preference.Preference
 import com.example.namegame.utility.FragmentTransaction
 import com.example.namegame.utility.Permission
 
 class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.DarkTheme)
+        if (Preference(applicationContext).getTheme()) {setTheme(R.style.DarkTheme)}
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         requestPermissions()

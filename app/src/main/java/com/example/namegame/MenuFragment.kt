@@ -26,7 +26,7 @@ class MenuFragment : Fragment() {
             beginTransactionTo(LearnFragment())
         }
         setting_button.setOnClickListener {
-            FragmentTransaction.beginTransactionWithBackStack(activity, R.id.host_fragment, LearnFragment())
+            FragmentTransaction.beginTransactionWithBackStack(activity, R.id.host_fragment, SettingFragment())
         }
     }
 

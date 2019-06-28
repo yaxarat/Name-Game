@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import com.example.namegame.data.shared_preference.Preference
+import kotlinx.android.synthetic.main.fragment_setting.*
 
 class SettingFragment : Fragment() {
 
@@ -17,6 +20,16 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO: Change theme here
+        switchTheme.setOnCheckedChangeListener { _: CompoundButton, isChecked: Boolean ->
+            if (isChecked) {
+                enableDarkTheme(true)
+            } else {
+                enableDarkTheme(false)
+            }
+        }
+    }
+
+    private fun enableDarkTheme(darkTheme: Boolean) {
+        Preference(this.requireContext()).setTheme(darkTheme)
     }
 }
