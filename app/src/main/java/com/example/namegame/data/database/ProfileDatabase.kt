@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.namegame.data.entity.Profile
 import com.example.namegame.data.service.ProfileDao
 
-@Database(entities = [Profile::class], version = 23)
+@Database(entities = [Profile::class], version = 1)
 abstract class ProfileDatabase : RoomDatabase() {
     abstract fun profilesDao(): ProfileDao
 
@@ -20,8 +20,6 @@ abstract class ProfileDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext, ProfileDatabase::class.java, "profile.db").fallbackToDestructiveMigration().build()
+            Room.databaseBuilder(context.applicationContext, ProfileDatabase::class.java, "profile.db").build()
     }
-
-
 }

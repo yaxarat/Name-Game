@@ -58,7 +58,7 @@ class GameFragment : ScopedFragment(), KodeinAware {
             textViewName.text = resources.getString(R.string.game_profile_name, name)
 
             for (n in 0 until 6) {
-                imageViews[n].isClickable = viewModel.clickable[n]!!
+                imageViews[n].isClickable = viewModel.clickable[n]
                 updateHeadshot(imageViews[n].isClickable, n, "https:" + it[n].headshot.url)
             }
         })
