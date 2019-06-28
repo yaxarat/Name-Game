@@ -4,7 +4,7 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   android:background="@color/wtWhite"
+                                                   android:background="?attr/colorBackground"
                                                    tools:context=".GameFragment"
                                                    android:id="@+id/frameLayout">
 
@@ -15,7 +15,7 @@
             android:paddingHorizontal="20dp"
             android:text=""
             android:textSize="30sp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="?attr/colorPrimary"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewScore" android:textSize="36sp"
-            android:textColor="@color/colorAccent" android:fontFamily="@font/roboto_mono_medium"
+            android:textColor="?attr/colorAccent" android:fontFamily="@font/roboto_mono_medium"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent" tools:text="@string/game_score"/>

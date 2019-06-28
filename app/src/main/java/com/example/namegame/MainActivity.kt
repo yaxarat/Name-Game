@@ -8,6 +8,7 @@ import com.example.namegame.utility.Permission
 class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.DarkTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         requestPermissions()

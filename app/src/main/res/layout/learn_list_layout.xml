@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             android:fontFamily="@font/roboto_mono_medium" android:textSize="18sp"
-            android:textColor="@color/colorPrimaryDark" app:layout_constraintVertical_bias="0.5"
+            android:textColor="?attr/colorPrimaryDark" app:layout_constraintVertical_bias="0.5"
             android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:textAlignment="center"/>
     <TextView
             android:text="TextView - 321"
@@ -32,7 +32,7 @@
             android:id="@+id/textViewPosition" app:layout_constraintStart_toEndOf="@+id/imageViewHeadshot"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/roboto_mono_thin"
-            android:textColor="@color/colorAccent" android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+            android:textColor="?attr/colorAccent" android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textViewName"
             android:textAlignment="center"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
