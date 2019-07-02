@@ -20,6 +20,8 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        switchTheme.isChecked = Preference(this.requireContext()).getTheme()
+
         switchTheme.setOnCheckedChangeListener { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
                 enableDarkTheme(true)
@@ -31,5 +33,6 @@ class SettingFragment : Fragment() {
 
     private fun enableDarkTheme(darkTheme: Boolean) {
         Preference(this.requireContext()).setTheme(darkTheme)
+        activity?.recreate()
     }
 }
