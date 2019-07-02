@@ -1,5 +1,6 @@
 package com.example.namegame.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.namegame.data.entity.Profile
 import com.example.namegame.data.service.ProfileDao
@@ -11,6 +12,7 @@ import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 
 class ProfileRepositoryImpl(private val profileDao: ProfileDao, private val profileDataSource: ProfileDataSource) : ProfileRepository {
+    private var lastFetchedTime = ZonedDateTime.now().minusMinutes(11)
     init {
         profileDataSource.downloadedProfiles.observeForever {
             newProfiles -> persistFetchedProfile(newProfiles)
@@ -39,14 +41,16 @@ class ProfileRepositoryImpl(private val profileDao: ProfileDao, private val prof
     }
 
     private suspend fun initProfileData() {
-        // TODO: fix date based fetch system
-        if (isFetchNeeded(ZonedDateTime.now().minusDays(2))) {
+        if (isFetchNeeded(lastFetchedTime)) {
+            Log.d("tag", "fetched")
+            lastFetchedTime = ZonedDateTime.now()
             profileDataSource.fetchProfiles()
+        } else {
+            Log.d("tag", "notFetched")
         }
     }
 
-    private fun isFetchNeeded(lastFetchTime: ZonedDateTime): Boolean {
-        val aDayAgo = ZonedDateTime.now().minusDays(1)
-        return lastFetchTime.isBefore(aDayAgo)
+    private fun isFetchNeeded(lastFetchedTime: ZonedDateTime): Boolean {
+        return lastFetchedTime.isBefore(ZonedDateTime.now().minusMinutes(10))
     }
 }
