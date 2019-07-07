@@ -1,4 +1,4 @@
-package com.example.namegame.adapter.holder
+package com.example.namegame.viewmodel.adapter.holder
 
 import android.content.Context
 import android.view.View

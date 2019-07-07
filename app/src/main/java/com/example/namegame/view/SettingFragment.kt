@@ -1,4 +1,4 @@
-package com.example.namegame
+package com.example.namegame.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import com.example.namegame.R
 import com.example.namegame.data.shared_preference.Preference
 import kotlinx.android.synthetic.main.fragment_setting.*
 

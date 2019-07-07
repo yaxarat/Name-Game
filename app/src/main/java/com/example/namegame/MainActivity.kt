@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.namegame.data.shared_preference.Preference
 import com.example.namegame.utility.FragmentTransaction
 import com.example.namegame.utility.Permission
+import com.example.namegame.view.MenuFragment
 
 class MainActivity : AppCompatActivity(){
 

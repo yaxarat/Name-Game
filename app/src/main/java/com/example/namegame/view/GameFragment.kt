@@ -1,4 +1,4 @@
-package com.example.namegame
+package com.example.namegame.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.namegame.R
+import com.example.namegame.ScopedFragment
 import com.example.namegame.utility.Media
 import com.example.namegame.viewmodel.GameViewModel
 import com.example.namegame.viewmodel.GameViewModelFactory

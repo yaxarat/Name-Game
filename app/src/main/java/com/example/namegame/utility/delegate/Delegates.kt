@@ -1,4 +1,4 @@
-package com.example.namegame.delegate
+package com.example.namegame.utility.delegate
 
 import kotlinx.coroutines.*
 

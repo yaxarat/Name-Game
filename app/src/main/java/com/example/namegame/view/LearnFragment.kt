@@ -1,4 +1,4 @@
-package com.example.namegame
+package com.example.namegame.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.namegame.adapter.LearnViewAdapter
+import com.example.namegame.R
+import com.example.namegame.ScopedFragment
+import com.example.namegame.viewmodel.adapter.LearnViewAdapter
 import com.example.namegame.viewmodel.LearnViewModel
 import com.example.namegame.viewmodel.LearnViewModelFactory
 import kotlinx.android.synthetic.main.fragment_learn.*
