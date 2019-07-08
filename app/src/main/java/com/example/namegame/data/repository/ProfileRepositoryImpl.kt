@@ -11,6 +11,9 @@ import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 
 class ProfileRepositoryImpl(private val profileDao: ProfileDao, private val profileDataSource: ProfileDataSource) : ProfileRepository {
+    private var now = ZonedDateTime.now()
+    private var lastFetchedTime = now.minusMinutes(31)
+
     init {
         profileDataSource.downloadedProfiles.observeForever {
             newProfiles -> persistFetchedProfile(newProfiles)
@@ -39,14 +42,9 @@ class ProfileRepositoryImpl(private val profileDao: ProfileDao, private val prof
     }
 
     private suspend fun initProfileData() {
-        // TODO: fix date based fetch system
-        if (isFetchNeeded(ZonedDateTime.now().minusDays(2))) {
+        if (lastFetchedTime.isBefore(now.minusMinutes(30))) {
+            lastFetchedTime = now
             profileDataSource.fetchProfiles()
         }
-    }
-
-    private fun isFetchNeeded(lastFetchTime: ZonedDateTime): Boolean {
-        val aDayAgo = ZonedDateTime.now().minusDays(1)
-        return lastFetchTime.isBefore(aDayAgo)
     }
 }
