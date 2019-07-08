@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.R
 import com.example.namegame.ScopedFragment
 import com.example.namegame.view.adapter.LearnViewAdapter
-import com.example.namegame.viewmodel.LearnViewModel
-import com.example.namegame.viewmodel.ViewModelFactory
+import com.example.namegame.view.viewmodel.LearnViewModel
+import com.example.namegame.view.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_learn.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware

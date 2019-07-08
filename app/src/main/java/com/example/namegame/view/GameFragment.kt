@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.R
 import com.example.namegame.ScopedFragment
 import com.example.namegame.utility.Media
-import com.example.namegame.viewmodel.GameViewModel
-import com.example.namegame.viewmodel.ViewModelFactory
+import com.example.namegame.view.viewmodel.GameViewModel
+import com.example.namegame.view.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
