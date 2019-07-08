@@ -10,7 +10,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 
-class ProfileRepository(private val profileDao: ProfileDao, private val profileDataSource: ProfileDataSource) {
+class ProfileRepository(private val profileDao: ProfileDao) {
+    private val profileDataSource = ProfileDataSource()
     private var now = ZonedDateTime.now()
     private var lastFetchedTime = now.minusMinutes(31)
 
