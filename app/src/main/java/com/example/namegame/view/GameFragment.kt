@@ -14,16 +14,16 @@ import com.example.namegame.view.viewmodel.GameViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
 
-class GameFragment : ScopedFragment(), KodeinAware {
-    override val kodein by kodein()
-    private val viewModelFactory: ViewModelFactory by instance()
+class GameFragment : ScopedFragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
     private var correctProfile = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(GameViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_game, container, false)
@@ -32,7 +32,6 @@ class GameFragment : ScopedFragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
         imageViews = arrayOf(
             imageViewHeadshot1,
             imageViewHeadshot2,

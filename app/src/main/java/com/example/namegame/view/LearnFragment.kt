@@ -13,14 +13,14 @@ import com.example.namegame.view.viewmodel.LearnViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_learn.*
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
 
-class LearnFragment : ScopedFragment(), KodeinAware {
-    override val kodein by kodein()
+class LearnFragment : ScopedFragment() {
     private lateinit var viewModel: LearnViewModel
-    private val viewModelFactory: ViewModelFactory by instance()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(LearnViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +31,6 @@ class LearnFragment : ScopedFragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(LearnViewModel::class.java)
         recyclerViewList.adapter = LearnViewAdapter(emptyList()) // set an empty adapter first to avoid "No adapter attached" error
         updateUI()
     }
