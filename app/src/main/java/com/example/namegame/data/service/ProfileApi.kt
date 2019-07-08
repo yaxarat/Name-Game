@@ -12,13 +12,9 @@ interface ProfileApi {
     suspend fun getProfiles(): List<Profile>
 
     companion object {
-        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): ProfileApi {
-            val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(connectivityInterceptor)
-                .build()
-
+        operator fun invoke(): ProfileApi {
             return Retrofit.Builder()
-                .client(okHttpClient)
+                .client(OkHttpClient.Builder().build())
                 .baseUrl("https://willowtreeapps.com/api/v1.0/")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()

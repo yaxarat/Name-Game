@@ -22,8 +22,7 @@ class MainApplication: Application(), KodeinAware {
 
         bind() from  singleton { ProfileDatabase(instance()) }
         bind() from singleton { instance<ProfileDatabase>().profilesDao()}
-        bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-        bind() from singleton { ProfileApi(instance()) }
+        bind() from singleton { ProfileApi() }
         bind<ProfileDataSource>() with singleton { ProfileDataSourceImpl(instance()) }
         bind<ProfileRepository>() with singleton { ProfileRepositoryImpl(instance(), instance()) }
         bind() from provider { GameViewModelFactory(instance()) }

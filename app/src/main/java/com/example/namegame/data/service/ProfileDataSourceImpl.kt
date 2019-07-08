@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.namegame.data.entity.Profile
+import java.io.IOException
 
 class ProfileDataSourceImpl(private val profileApi: ProfileApi) : ProfileDataSource {
     private val _downloadedProfiles = MutableLiveData<List<Profile>>()
@@ -13,7 +14,7 @@ class ProfileDataSourceImpl(private val profileApi: ProfileApi) : ProfileDataSou
         try {
             val fetchedProfile = profileApi.getProfiles()
             _downloadedProfiles.postValue(fetchedProfile)
-        } catch (e: NoConnectivityException) {
+        } catch (e: IOException) {
             Log.e("Error", "No internet connection", e)
         }
     }
