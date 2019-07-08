@@ -8,9 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.R
 import com.example.namegame.ScopedFragment
-import com.example.namegame.viewmodel.adapter.LearnViewAdapter
+import com.example.namegame.view.adapter.LearnViewAdapter
 import com.example.namegame.viewmodel.LearnViewModel
-import com.example.namegame.viewmodel.LearnViewModelFactory
+import com.example.namegame.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_learn.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -20,7 +20,7 @@ import org.kodein.di.generic.instance
 class LearnFragment : ScopedFragment(), KodeinAware {
     override val kodein by kodein()
     private lateinit var viewModel: LearnViewModel
-    private val viewModelFactory: LearnViewModelFactory by instance()
+    private val viewModelFactory: ViewModelFactory by instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -1,11 +1,11 @@
-package com.example.namegame.viewmodel.adapter
+package com.example.namegame.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.namegame.R
-import com.example.namegame.viewmodel.adapter.holder.ProfileViewHolder
+import com.example.namegame.view.adapter.holder.ProfileViewHolder
 import com.example.namegame.data.entity.Profile
 
 class LearnViewAdapter (profilesList: List<Profile>): RecyclerView.Adapter<ViewHolder>() {

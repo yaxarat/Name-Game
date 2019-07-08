@@ -11,7 +11,7 @@ import com.example.namegame.R
 import com.example.namegame.ScopedFragment
 import com.example.namegame.utility.Media
 import com.example.namegame.viewmodel.GameViewModel
-import com.example.namegame.viewmodel.GameViewModelFactory
+import com.example.namegame.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -20,7 +20,7 @@ import org.kodein.di.generic.instance
 
 class GameFragment : ScopedFragment(), KodeinAware {
     override val kodein by kodein()
-    private val viewModelFactory: GameViewModelFactory by instance()
+    private val viewModelFactory: ViewModelFactory by instance()
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
     private var correctProfile = 0

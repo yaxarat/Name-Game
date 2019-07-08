@@ -5,8 +5,7 @@ import com.example.namegame.data.database.ProfileDatabase
 import com.example.namegame.data.repository.ProfileRepository
 import com.example.namegame.data.repository.ProfileRepositoryImpl
 import com.example.namegame.data.service.*
-import com.example.namegame.viewmodel.GameViewModelFactory
-import com.example.namegame.viewmodel.LearnViewModelFactory
+import com.example.namegame.viewmodel.ViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -25,8 +24,7 @@ class MainApplication: Application(), KodeinAware {
         bind() from singleton { ProfileApi() }
         bind<ProfileDataSource>() with singleton { ProfileDataSourceImpl(instance()) }
         bind<ProfileRepository>() with singleton { ProfileRepositoryImpl(instance(), instance()) }
-        bind() from provider { GameViewModelFactory(instance()) }
-        bind() from provider { LearnViewModelFactory(instance()) }
+        bind() from provider { ViewModelFactory(instance()) }
     }
 
     override fun onCreate() {
