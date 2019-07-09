@@ -3,9 +3,11 @@ package com.example.namegame.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.namegame.R
-import com.example.namegame.data.shared_preference.Preference
+import com.example.namegame.database.repository.ProfileRepository
+import com.example.namegame.database.shared_preference.Preference
 import com.example.namegame.utility.FragmentTransaction
 import com.example.namegame.utility.Permission
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(){
 

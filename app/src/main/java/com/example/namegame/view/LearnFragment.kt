@@ -1,13 +1,16 @@
 package com.example.namegame.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.namegame.MainApp
 import com.example.namegame.R
-import com.example.namegame.app.ScopedFragment
+import com.example.namegame.database.repository.ProfileRepository
+import com.example.namegame.scope.ScopedFragment
 import com.example.namegame.view.adapter.LearnViewAdapter
 import com.example.namegame.view.viewmodel.LearnViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
@@ -16,10 +19,16 @@ import kotlinx.coroutines.launch
 
 class LearnFragment : ScopedFragment() {
     private lateinit var viewModel: LearnViewModel
+    lateinit var repository: ProfileRepository
+
+    override fun onAttach(context: Context) {
+        repository = MainApp.app.appComponent.repository()
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(LearnViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(repository)).get(LearnViewModel::class.java)
     }
 
     override fun onCreateView(

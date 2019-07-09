@@ -1,5 +1,6 @@
 package com.example.namegame.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,22 +8,31 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.namegame.MainApp
 import com.example.namegame.R
-import com.example.namegame.app.ScopedFragment
+import com.example.namegame.database.repository.ProfileRepository
+import com.example.namegame.scope.ScopedFragment
 import com.example.namegame.utility.Media
 import com.example.namegame.view.viewmodel.GameViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class GameFragment : ScopedFragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
     private var correctProfile = 0
+    @Inject lateinit var profileRepository: ProfileRepository
+
+    override fun onAttach(context: Context) {
+        MainApp.app.appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(GameViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(profileRepository)).get(GameViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

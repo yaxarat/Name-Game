@@ -1,16 +1,18 @@
-package com.example.namegame.data.repository
+package com.example.namegame.database.repository
 
 import androidx.lifecycle.LiveData
-import com.example.namegame.data.entity.Profile
-import com.example.namegame.data.service.ProfileDao
-import com.example.namegame.data.service.ProfileDataSource
+import com.example.namegame.database.entity.Profile
+import com.example.namegame.database.service.ProfileDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class ProfileRepository(private val profileDao: ProfileDao) {
+@Singleton
+class ProfileRepository @Inject constructor(var profileDao: ProfileDao) {
     private val profileDataSource = ProfileDataSource()
     private var now = ZonedDateTime.now()
     private var lastFetchedTime = now.minusMinutes(31)

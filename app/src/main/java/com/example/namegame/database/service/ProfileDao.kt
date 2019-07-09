@@ -1,4 +1,4 @@
-package com.example.namegame.data.service
+package com.example.namegame.database.service
 
 
 import androidx.lifecycle.LiveData
@@ -6,7 +6,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.namegame.data.entity.Profile
+import com.example.namegame.database.entity.Profile
 
 @Dao
 interface ProfileDao {

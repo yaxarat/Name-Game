@@ -1,6 +1,6 @@
-package com.example.namegame.data.service
+package com.example.namegame.database.service
 
-import com.example.namegame.data.entity.Profile
+import com.example.namegame.database.entity.Profile
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

@@ -1,4 +1,4 @@
-package com.example.namegame.data.shared_preference
+package com.example.namegame.database.shared_preference
 
 import android.content.Context
 

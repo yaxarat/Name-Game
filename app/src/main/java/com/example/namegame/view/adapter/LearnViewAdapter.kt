@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.namegame.R
 import com.example.namegame.view.adapter.holder.ProfileViewHolder
-import com.example.namegame.data.entity.Profile
+import com.example.namegame.database.entity.Profile
 
 class LearnViewAdapter (profilesList: List<Profile>): RecyclerView.Adapter<ViewHolder>() {
     private val profiles = profilesList

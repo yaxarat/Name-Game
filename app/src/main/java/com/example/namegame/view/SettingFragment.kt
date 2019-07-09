@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import com.example.namegame.R
-import com.example.namegame.data.shared_preference.Preference
+import com.example.namegame.database.shared_preference.Preference
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 class SettingFragment : Fragment() {

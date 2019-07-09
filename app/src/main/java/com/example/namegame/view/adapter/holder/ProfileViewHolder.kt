@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.namegame.R
-import com.example.namegame.data.entity.Profile
+import com.example.namegame.database.entity.Profile
 import com.example.namegame.utility.Media
 import kotlinx.android.synthetic.main.learn_list_layout.view.*
 
