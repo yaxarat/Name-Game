@@ -1,6 +1,5 @@
 package com.example.namegame.view
 
-import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.MainApp
 import com.example.namegame.R
-import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.scope.ScopedFragment
 import com.example.namegame.utility.Media
 import com.example.namegame.view.viewmodel.GameViewModel

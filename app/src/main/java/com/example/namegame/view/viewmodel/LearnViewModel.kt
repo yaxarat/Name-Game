@@ -7,12 +7,11 @@ import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.utility.delegate.lazyDeferred
 import kotlinx.coroutines.Deferred
 
-class LearnViewModel(profileRepository: ProfileRepository) : ViewModel() {
-    private val repository = profileRepository
+class LearnViewModel(private var profileRepository: ProfileRepository) : ViewModel() {
     var profiles: Deferred<LiveData<List<Profile>>>
 
     init {
-        val profile by lazyDeferred {repository.getAllProfiles()}
+        val profile by lazyDeferred {profileRepository.getAllProfiles()}
         profiles = profile
     }
 }

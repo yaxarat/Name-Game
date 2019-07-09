@@ -1,7 +1,9 @@
 package com.example.namegame.view
 
+import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.namegame.MainApp
 import com.example.namegame.R
 import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.database.shared_preference.Preference
@@ -10,9 +12,11 @@ import com.example.namegame.utility.Permission
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(){
+    @Inject lateinit var app: Application
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (Preference(applicationContext).getTheme()) {setTheme(R.style.DarkTheme)}
+        MainApp.app.appComponent.inject(this)
+        if (Preference(app).getTheme()) {setTheme(R.style.DarkTheme)}
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         requestPermissions()

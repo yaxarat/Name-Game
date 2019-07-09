@@ -8,8 +8,7 @@ import javax.inject.Singleton
 
 @Suppress("UNCHECKED_CAST")
 @Singleton
-class ViewModelFactory @Inject constructor(var profileRepository: ProfileRepository) : ViewModelProvider.NewInstanceFactory() {
-
+class ViewModelFactory @Inject constructor(private var profileRepository: ProfileRepository) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when (modelClass) {
             GameViewModel::class.java -> GameViewModel(profileRepository) as T

@@ -8,8 +8,7 @@ import com.example.namegame.R
 import com.example.namegame.view.adapter.holder.ProfileViewHolder
 import com.example.namegame.database.entity.Profile
 
-class LearnViewAdapter (profilesList: List<Profile>): RecyclerView.Adapter<ViewHolder>() {
-    private val profiles = profilesList
+class LearnViewAdapter (private val profilesList: List<Profile>): RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -18,10 +17,10 @@ class LearnViewAdapter (profilesList: List<Profile>): RecyclerView.Adapter<ViewH
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        (holder as ProfileViewHolder).setProfile(profiles[position])
+        (holder as ProfileViewHolder).setProfile(profilesList[position])
     }
 
     override fun getItemCount(): Int{
-        return profiles.size
+        return profilesList.size
     }
 }

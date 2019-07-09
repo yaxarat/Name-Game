@@ -14,5 +14,4 @@ class AppModule(var app: Application) {
     fun providesApplication(): Application {
         return app
     }
-
 }

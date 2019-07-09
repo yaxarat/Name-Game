@@ -5,14 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.database.repository.service.ProfileApi
-import com.example.namegame.database.repository.service.ProfileDataSource_Imp
+import com.example.namegame.database.repository.service.ProfileDataSource
 import java.io.IOException
 
-class ProfileDataSource: ProfileDataSource_Imp {
+class ProfileDataSourceImp: ProfileDataSource {
     private val _downloadedProfiles = MutableLiveData<List<Profile>>()
     override val downloadedProfiles: LiveData<List<Profile>> get() = _downloadedProfiles
 
-    suspend fun fetchProfiles() {
+    override suspend fun fetchProfiles() {
         try {
             val fetchedProfile = ProfileApi.invoke().getProfiles()
             _downloadedProfiles.postValue(fetchedProfile)

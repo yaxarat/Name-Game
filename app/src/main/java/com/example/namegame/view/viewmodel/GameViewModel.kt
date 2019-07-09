@@ -7,8 +7,7 @@ import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.utility.delegate.lazyDeferred
 import kotlinx.coroutines.Deferred
 
-class GameViewModel(profileRepository: ProfileRepository) : ViewModel() {
-    private val repository = profileRepository
+class GameViewModel(private val profileRepository: ProfileRepository) : ViewModel() {
     lateinit var profiles: Deferred<LiveData<List<Profile>>>
     var clickable = BooleanArray(6) {true}
     var answerIndex = 0
@@ -20,7 +19,7 @@ class GameViewModel(profileRepository: ProfileRepository) : ViewModel() {
     }
 
     fun newRound() {
-        val profile by lazyDeferred {repository.getProfiles()}
+        val profile by lazyDeferred {profileRepository.getProfiles()}
         profiles = profile
         answerIndex = (0 .. 5).random()
         clickable.fill(true)

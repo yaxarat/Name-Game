@@ -1,8 +1,10 @@
 package com.example.namegame.database.repository
 
 import androidx.lifecycle.LiveData
+import com.example.namegame.MainApp
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.database.repository.service.ProfileDao
+import com.example.namegame.database.repository.service.ProfileDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,11 +15,12 @@ import javax.inject.Singleton
 
 @Singleton
 class ProfileRepository @Inject constructor(var profileDao: ProfileDao) {
-    private val profileDataSource = ProfileDataSource()
+    @Inject lateinit var profileDataSource: ProfileDataSource
     private var now = ZonedDateTime.now()
     private var lastFetchedTime = now.minusMinutes(31)
 
     init {
+        MainApp.app.appComponent.inject(this)
         profileDataSource.downloadedProfiles.observeForever {
             newProfiles -> persistFetchedProfile(newProfiles)
         }

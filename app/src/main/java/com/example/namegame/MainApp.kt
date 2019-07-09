@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.namegame.di.AppComponent
 import com.example.namegame.di.AppModule
 import com.example.namegame.di.DaggerAppComponent
-import com.example.namegame.di.RoomModule
 import com.jakewharton.threetenabp.AndroidThreeTen
 
 class MainApp : Application() {
@@ -19,8 +18,8 @@ class MainApp : Application() {
         app = this
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this))
-            .roomModule(RoomModule())
             .build()
+
         AndroidThreeTen.init(this)
     }
 }
