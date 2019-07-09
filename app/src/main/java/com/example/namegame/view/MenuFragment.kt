@@ -32,7 +32,7 @@ class MenuFragment : Fragment() {
     }
 
     private fun beginTransactionTo(destinationFragment: Fragment) {
-        if (Network.isOnline(activity!!)) {
+        if (Network.isOnline(requireContext())) {
             FragmentTransaction.beginTransactionWithBackStack(activity, R.id.host_fragment, destinationFragment)
         } else {
             Toast.makeText(activity, R.string.error_menu_no_network, Toast.LENGTH_LONG).show()

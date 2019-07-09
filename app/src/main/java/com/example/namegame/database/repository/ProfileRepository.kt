@@ -14,8 +14,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ProfileRepository @Inject constructor(var profileDao: ProfileDao) {
-    @Inject lateinit var profileDataSource: ProfileDataSource
+class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, private val profileDataSource: ProfileDataSource) {
     private var now = ZonedDateTime.now()
     private var lastFetchedTime = now.minusMinutes(31)
 
