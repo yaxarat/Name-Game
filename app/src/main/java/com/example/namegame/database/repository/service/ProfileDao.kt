@@ -1,4 +1,4 @@
-package com.example.namegame.database.service
+package com.example.namegame.database.repository.service
 
 
 import androidx.lifecycle.LiveData

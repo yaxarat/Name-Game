@@ -16,13 +16,14 @@ import com.example.namegame.view.viewmodel.LearnViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_learn.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class LearnFragment : ScopedFragment() {
     private lateinit var viewModel: LearnViewModel
-    lateinit var repository: ProfileRepository
+    @Inject lateinit var repository: ProfileRepository
 
     override fun onAttach(context: Context) {
-        repository = MainApp.app.appComponent.repository()
+        MainApp.app.appComponent.inject(this)
         super.onAttach(context)
     }
 

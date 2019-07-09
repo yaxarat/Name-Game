@@ -1,5 +1,6 @@
 package com.example.namegame.view
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +24,7 @@ class GameFragment : ScopedFragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
     private var correctProfile = 0
-    @Inject lateinit var profileRepository: ProfileRepository
+    @Inject lateinit var viewModelFactory: ViewModelFactory
 
     override fun onAttach(context: Context) {
         MainApp.app.appComponent.inject(this)
@@ -32,7 +33,7 @@ class GameFragment : ScopedFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(profileRepository)).get(GameViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

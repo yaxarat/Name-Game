@@ -1,4 +1,4 @@
-package com.example.namegame.database.service
+package com.example.namegame.database.repository.service
 
 import com.example.namegame.database.entity.Profile
 import okhttp3.OkHttpClient

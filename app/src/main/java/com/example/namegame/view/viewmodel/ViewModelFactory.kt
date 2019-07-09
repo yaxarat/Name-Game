@@ -1,6 +1,5 @@
 package com.example.namegame.view.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.namegame.database.repository.ProfileRepository
@@ -12,7 +11,6 @@ import javax.inject.Singleton
 class ViewModelFactory @Inject constructor(var profileRepository: ProfileRepository) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        Log.d("tag", "this is: $profileRepository")
         return when (modelClass) {
             GameViewModel::class.java -> GameViewModel(profileRepository) as T
             LearnViewModel::class.java -> LearnViewModel(profileRepository) as T
