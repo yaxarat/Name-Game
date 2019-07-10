@@ -21,8 +21,8 @@ import javax.inject.Inject
 class GameFragment : ScopedFragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
-    private var correctProfile = 0
     @Inject lateinit var viewModelFactory: ViewModelFactory
+    private var correctProfile = 0
 
     override fun onAttach(context: Context) {
         MainApp.app.appComponent.inject(this)

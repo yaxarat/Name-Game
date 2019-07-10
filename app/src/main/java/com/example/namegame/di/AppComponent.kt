@@ -16,6 +16,6 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(learnFragment: LearnFragment)
     fun inject(gameFragment: GameFragment)
-    fun inject(profileDataSourceImp: ProfileDataSourceImp)
     fun inject(settingFragment: SettingFragment)
+    fun inject(profileDataSourceImp: ProfileDataSourceImp)
 }

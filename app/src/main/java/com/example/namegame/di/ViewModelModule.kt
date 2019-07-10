@@ -1,6 +1,7 @@
 package com.example.namegame.di
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.view.viewmodel.GameViewModel
 import com.example.namegame.view.viewmodel.LearnViewModel
@@ -14,15 +15,10 @@ import kotlin.reflect.KClass
 
 @Module
 class ViewModelModule {
-    @Target(AnnotationTarget.FUNCTION)
-    @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+
+    @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
     @MapKey
     annotation class ViewModelKey(val value: KClass<out ViewModel>)
-
-    @Provides
-    fun provideViewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelFactory {
-        return ViewModelFactory(providerMap)
-    }
 
     @Provides
     @IntoMap
@@ -36,5 +32,10 @@ class ViewModelModule {
     @ViewModelKey(GameViewModel::class)
     fun provideGameViewModel(repository: ProfileRepository): ViewModel {
         return GameViewModel(repository)
+    }
+
+    @Provides
+    fun provideViewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProvider.NewInstanceFactory {
+        return ViewModelFactory(providerMap)
     }
 }
