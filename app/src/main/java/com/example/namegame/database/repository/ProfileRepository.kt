@@ -1,7 +1,6 @@
 package com.example.namegame.database.repository
 
 import androidx.lifecycle.LiveData
-import com.example.namegame.MainApp
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.database.repository.service.ProfileDao
 import com.example.namegame.database.repository.service.ProfileDataSource
@@ -19,7 +18,6 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
     private var lastFetchedTime = now.minusMinutes(31)
 
     init {
-        MainApp.app.appComponent.inject(this)
         profileDataSource.downloadedProfiles.observeForever {
             newProfiles -> persistFetchedProfile(newProfiles)
         }

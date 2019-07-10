@@ -2,12 +2,18 @@ package com.example.namegame.view.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.namegame.MainApp
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.database.repository.ProfileRepository
+import com.example.namegame.di.ViewModelModule
 import com.example.namegame.utility.delegate.lazyDeferred
+import dagger.Reusable
+import dagger.multibindings.IntoMap
 import kotlinx.coroutines.Deferred
+import javax.inject.Inject
 
-class GameViewModel(private val profileRepository: ProfileRepository) : ViewModel() {
+class GameViewModel : ViewModel() {
+    @Inject lateinit var profileRepository: ProfileRepository
     lateinit var profiles: Deferred<LiveData<List<Profile>>>
     var clickable = BooleanArray(6) {true}
     var answerIndex = 0
@@ -15,6 +21,7 @@ class GameViewModel(private val profileRepository: ProfileRepository) : ViewMode
     var attempt = 0
 
     init {
+        MainApp.app.appComponent.inject(this)
         newRound()
     }
 

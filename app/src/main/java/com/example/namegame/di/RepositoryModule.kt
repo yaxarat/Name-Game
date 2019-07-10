@@ -11,7 +11,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class RoomModule {
+class RepositoryModule {
 
     @Singleton
     @Provides
@@ -23,11 +23,5 @@ class RoomModule {
     @Provides
     fun providesDao(database: ProfileDatabase): ProfileDao {
         return  database.profilesDao()
-    }
-
-    @Singleton
-    @Provides
-    fun providesRepository(dao: ProfileDao, dataSource: ProfileDataSource): ProfileRepository {
-        return ProfileRepository(dao, dataSource)
     }
 }

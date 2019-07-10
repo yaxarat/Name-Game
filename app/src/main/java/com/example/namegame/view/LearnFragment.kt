@@ -21,6 +21,7 @@ import javax.inject.Inject
 class LearnFragment : ScopedFragment() {
     private lateinit var viewModel: LearnViewModel
     @Inject lateinit var repository: ProfileRepository
+    @Inject lateinit var viewModelFactory: ViewModelFactory
 
     override fun onAttach(context: Context) {
         MainApp.app.appComponent.inject(this)
@@ -29,7 +30,7 @@ class LearnFragment : ScopedFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(repository)).get(LearnViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(LearnViewModel::class.java)
     }
 
     override fun onCreateView(
