@@ -1,6 +1,7 @@
 package com.example.namegame.di
 
 import androidx.lifecycle.ViewModel
+import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.view.viewmodel.GameViewModel
 import com.example.namegame.view.viewmodel.LearnViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
@@ -26,14 +27,14 @@ class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(LearnViewModel::class)
-    fun provideLearnViewModel(): ViewModel {
-        return LearnViewModel()
+    fun provideLearnViewModel(repository: ProfileRepository): ViewModel {
+        return LearnViewModel(repository)
     }
 
     @Provides
     @IntoMap
     @ViewModelKey(GameViewModel::class)
-    fun provideGameViewModel(): ViewModel {
-        return GameViewModel()
+    fun provideGameViewModel(repository: ProfileRepository): ViewModel {
+        return GameViewModel(repository)
     }
 }

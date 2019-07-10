@@ -18,6 +18,4 @@ interface AppComponent {
     fun inject(gameFragment: GameFragment)
     fun inject(profileDataSourceImp: ProfileDataSourceImp)
     fun inject(settingFragment: SettingFragment)
-    fun inject(gameViewModel: GameViewModel)
-    fun inject(learnViewModel: LearnViewModel)
 }

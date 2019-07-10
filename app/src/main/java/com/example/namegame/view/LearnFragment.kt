@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.MainApp
 import com.example.namegame.R
-import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.scope.ScopedFragment
 import com.example.namegame.view.adapter.LearnViewAdapter
 import com.example.namegame.view.viewmodel.LearnViewModel
@@ -20,7 +19,6 @@ import javax.inject.Inject
 
 class LearnFragment : ScopedFragment() {
     private lateinit var viewModel: LearnViewModel
-    @Inject lateinit var repository: ProfileRepository
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
     override fun onAttach(context: Context) {

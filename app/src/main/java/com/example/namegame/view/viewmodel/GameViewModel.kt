@@ -12,8 +12,7 @@ import dagger.multibindings.IntoMap
 import kotlinx.coroutines.Deferred
 import javax.inject.Inject
 
-class GameViewModel : ViewModel() {
-    @Inject lateinit var profileRepository: ProfileRepository
+class GameViewModel (private val profileRepository: ProfileRepository) : ViewModel() {
     lateinit var profiles: Deferred<LiveData<List<Profile>>>
     var clickable = BooleanArray(6) {true}
     var answerIndex = 0
@@ -21,7 +20,6 @@ class GameViewModel : ViewModel() {
     var attempt = 0
 
     init {
-        MainApp.app.appComponent.inject(this)
         newRound()
     }
 
