@@ -1,4 +1,4 @@
-package com.example.namegame.scope
+package com.example.namegame
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

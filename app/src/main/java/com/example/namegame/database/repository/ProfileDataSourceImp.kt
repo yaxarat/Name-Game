@@ -12,14 +12,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ProfileDataSourceImp: ProfileDataSource {
-    @Inject lateinit var profileApi: ProfileApi
+class ProfileDataSourceImp @Inject constructor(var profileApi: ProfileApi): ProfileDataSource {
     private val _downloadedProfiles = MutableLiveData<List<Profile>>()
     override val downloadedProfiles: LiveData<List<Profile>> get() = _downloadedProfiles
-
-    init {
-        MainApp.app.appComponent.inject(this)
-    }
 
     override suspend fun fetchProfiles() {
         try {

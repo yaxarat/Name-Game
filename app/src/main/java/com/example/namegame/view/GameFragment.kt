@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.MainApp
 import com.example.namegame.R
-import com.example.namegame.scope.ScopedFragment
+import com.example.namegame.ScopedFragment
 import com.example.namegame.utility.Media
 import com.example.namegame.view.viewmodel.GameViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory

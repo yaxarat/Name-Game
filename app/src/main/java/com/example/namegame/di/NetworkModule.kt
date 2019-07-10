@@ -11,6 +11,7 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
+    // TODO: breakup to multiple providers
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit {
