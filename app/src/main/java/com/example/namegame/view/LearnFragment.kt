@@ -22,7 +22,7 @@ class LearnFragment : ScopedFragment() {
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
     override fun onAttach(context: Context) {
-        MainApp.app.appComponent.inject(this)
+        MainApp.application.appComponent.inject(this)
         super.onAttach(context)
     }
 

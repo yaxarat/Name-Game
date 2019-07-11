@@ -25,7 +25,7 @@ class GameFragment : ScopedFragment() {
     private var correctProfile = 0
 
     override fun onAttach(context: Context) {
-        MainApp.app.appComponent.inject(this)
+        MainApp.application.appComponent.inject(this)
         super.onAttach(context)
     }
 

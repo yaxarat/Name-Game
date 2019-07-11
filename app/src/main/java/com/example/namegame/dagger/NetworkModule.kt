@@ -11,14 +11,25 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-    // TODO: breakup to multiple providers
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideOkHttpClient(): OkHttpClient {
+        return  OkHttpClient.Builder().build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideMoshi(): MoshiConverterFactory {
+        return MoshiConverterFactory.create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient, moshiConverterFactory: MoshiConverterFactory): Retrofit {
         return Retrofit.Builder()
-            .client(OkHttpClient.Builder().build())
+            .client(okHttpClient)
             .baseUrl("https://willowtreeapps.com/api/v1.0/")
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(moshiConverterFactory)
             .build()
     }
 

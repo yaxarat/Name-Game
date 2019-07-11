@@ -9,7 +9,6 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AppModule::class, RepositoryModule::class, NetworkModule::class, ViewModelModule::class])
-// TODO: inner interface to provide app instance. Builder
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(learnFragment: LearnFragment)

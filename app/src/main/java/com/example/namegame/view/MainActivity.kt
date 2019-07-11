@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.namegame.MainApp
 import com.example.namegame.R
-import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.database.shared_preference.Preference
 import com.example.namegame.utility.FragmentTransaction
 import com.example.namegame.utility.Permission
@@ -15,7 +14,7 @@ class MainActivity : AppCompatActivity(){
     @Inject lateinit var app: Application
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        MainApp.app.appComponent.inject(this)
+        MainApp.application.appComponent.inject(this)
         if (Preference(app).getTheme()) {setTheme(R.style.DarkTheme)}
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
