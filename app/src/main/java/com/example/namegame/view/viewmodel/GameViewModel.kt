@@ -2,15 +2,10 @@ package com.example.namegame.view.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.namegame.MainApp
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.database.repository.ProfileRepository
-import com.example.namegame.di.ViewModelModule
 import com.example.namegame.utility.delegate.lazyDeferred
-import dagger.Reusable
-import dagger.multibindings.IntoMap
 import kotlinx.coroutines.Deferred
-import javax.inject.Inject
 
 class GameViewModel (private val profileRepository: ProfileRepository) : ViewModel() {
     lateinit var profiles: Deferred<LiveData<List<Profile>>>

@@ -1,10 +1,9 @@
-package com.example.namegame.di
+package com.example.namegame.dagger
 
 import com.example.namegame.database.repository.ProfileDataSourceImp
 import com.example.namegame.database.repository.service.ProfileDataSource
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import javax.inject.Singleton
 
 @Module

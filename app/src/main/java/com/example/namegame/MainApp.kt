@@ -1,9 +1,9 @@
 package com.example.namegame
 
 import android.app.Application
-import com.example.namegame.di.AppComponent
-import com.example.namegame.di.AppModule
-import com.example.namegame.di.DaggerAppComponent
+import com.example.namegame.dagger.AppComponent
+import com.example.namegame.dagger.AppModule
+import com.example.namegame.dagger.DaggerAppComponent
 import com.jakewharton.threetenabp.AndroidThreeTen
 
 class MainApp : Application() {

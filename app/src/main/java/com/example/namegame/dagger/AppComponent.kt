@@ -1,12 +1,9 @@
-package com.example.namegame.di
+package com.example.namegame.dagger
 
-import com.example.namegame.database.repository.ProfileDataSourceImp
 import com.example.namegame.view.GameFragment
 import com.example.namegame.view.LearnFragment
 import com.example.namegame.view.MainActivity
 import com.example.namegame.view.SettingFragment
-import com.example.namegame.view.viewmodel.GameViewModel
-import com.example.namegame.view.viewmodel.LearnViewModel
 import dagger.Component
 import javax.inject.Singleton
 

@@ -1,4 +1,4 @@
-package com.example.namegame.di
+package com.example.namegame.dagger
 
 import com.example.namegame.database.repository.service.ProfileApi
 import dagger.Module

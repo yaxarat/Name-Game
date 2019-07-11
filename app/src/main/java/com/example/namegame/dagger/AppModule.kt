@@ -1,4 +1,4 @@
-package com.example.namegame.di
+package com.example.namegame.dagger
 
 import android.app.Application
 import dagger.Module

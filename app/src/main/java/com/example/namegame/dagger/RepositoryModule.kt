@@ -1,11 +1,9 @@
-package com.example.namegame.di
+package com.example.namegame.dagger
 
 import android.app.Application
 import androidx.room.Room
 import com.example.namegame.database.repository.ProfileDatabase
-import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.database.repository.service.ProfileDao
-import com.example.namegame.database.repository.service.ProfileDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
