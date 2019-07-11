@@ -8,7 +8,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, RepositoryModule::class, DataSourceModule::class, NetworkModule::class, ViewModelModule::class])
+@Component(modules = [AppModule::class, RepositoryModule::class, NetworkModule::class, ViewModelModule::class])
 // TODO: inner interface to provide app instance. Builder
 interface AppComponent {
     fun inject(mainActivity: MainActivity)

@@ -3,7 +3,6 @@ package com.example.namegame.database.repository
 import androidx.lifecycle.LiveData
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.database.repository.service.ProfileDao
-import com.example.namegame.database.repository.service.ProfileDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
