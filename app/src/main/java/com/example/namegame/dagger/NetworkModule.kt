@@ -10,6 +10,7 @@ import javax.inject.Singleton
 
 @Module
 class NetworkModule {
+    private val willowtreeApiBaseUrl = "https://willowtreeapps.com/api/v1.0/"
 
     @Singleton
     @Provides
@@ -25,11 +26,11 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, moshiConverterFactory: MoshiConverterFactory): Retrofit {
+    fun provideRetrofit(client: OkHttpClient, converterFactory: MoshiConverterFactory): Retrofit {
         return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("https://willowtreeapps.com/api/v1.0/")
-            .addConverterFactory(moshiConverterFactory)
+            .client(client)
+            .baseUrl(willowtreeApiBaseUrl)
+            .addConverterFactory(converterFactory)
             .build()
     }
 

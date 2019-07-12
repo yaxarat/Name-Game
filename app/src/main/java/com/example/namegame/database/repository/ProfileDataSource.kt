@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ProfileDataSource @Inject constructor(private var profileApi: ProfileApi) {
+class ProfileDataSource @Inject constructor(private val profileApi: ProfileApi) {
     private val _downloadedProfiles = MutableLiveData<List<Profile>>()
     val downloadedProfiles: LiveData<List<Profile>> get() = _downloadedProfiles
 

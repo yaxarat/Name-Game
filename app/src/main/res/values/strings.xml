@@ -1,4 +1,5 @@
 <resources>
+    // View texts
     <string name="app_name">Name Game</string>
     <string name="menu_start">Start</string>
     <string name="menu_learn">Learn</string>
