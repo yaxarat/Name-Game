@@ -18,9 +18,10 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
 
     init {
         profileDataSource.downloadedProfiles.observeForever {
-            newProfiles -> persistFetchedProfile(newProfiles)
+            newFetchedProfiles -> saveFetchedProfiles(newFetchedProfiles)
         }
     }
+
     suspend fun getProfiles(): LiveData<List<Profile>> {
         return withContext(Dispatchers.IO) {
             initProfileData()
@@ -35,7 +36,7 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
         }
     }
 
-    private fun persistFetchedProfile(fetchedProfile: List<Profile>) {
+    private fun saveFetchedProfiles(fetchedProfile: List<Profile>) {
         GlobalScope.launch(Dispatchers.IO) {
             for (profile in fetchedProfile) {
                 profileDao.upsert(profile)
