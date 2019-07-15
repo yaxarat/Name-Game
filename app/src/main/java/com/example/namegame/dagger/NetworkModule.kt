@@ -37,8 +37,8 @@ class NetworkModule {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(willowtreeApiBaseUrl)
-            .addConverterFactory(converterFactory)
             .addCallAdapterFactory(adapterFactory)
+            .addConverterFactory(converterFactory)
             .build()
     }
 

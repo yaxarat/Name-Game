@@ -44,7 +44,7 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
         }
     }
 
-    private suspend fun initProfileData() {
+    private fun initProfileData() {
         if (lastFetchedTime.isBefore(now.minusMinutes(30))) {
             lastFetchedTime = now
             profileDataSource.fetchProfiles()
