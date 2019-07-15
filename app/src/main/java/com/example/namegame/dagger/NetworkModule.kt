@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
@@ -26,11 +27,18 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(client: OkHttpClient, converterFactory: MoshiConverterFactory): Retrofit {
+    fun provideRxJava(): RxJava2CallAdapterFactory {
+        return RxJava2CallAdapterFactory.create()
+
+    }
+    @Singleton
+    @Provides
+    fun provideRetrofit(client: OkHttpClient, converterFactory: MoshiConverterFactory, adapterFactory: RxJava2CallAdapterFactory): Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(willowtreeApiBaseUrl)
             .addConverterFactory(converterFactory)
+            .addCallAdapterFactory(adapterFactory)
             .build()
     }
 
