@@ -13,6 +13,8 @@ class ProfileDataSource @Inject constructor(private val profileApi: ProfileApi) 
 
     @SuppressLint("CheckResult") // TODO: check this warning
     fun fetchProfiles() {
+        // TODO: this runs on main thread
+        Log.d("tag", "${Thread.currentThread()}")
         profileApi.getProfiles().subscribe(
             {profileList -> this.downloadedProfiles = profileList},
             {throwable -> Log.e("tag", "$throwable")}

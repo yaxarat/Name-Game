@@ -34,7 +34,7 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
         }
     }
 
-    private fun saveFetchedProfiles(fetchedProfile: List<Profile>) {
+    fun saveFetchedProfiles(fetchedProfile: List<Profile>) {
         GlobalScope.launch(Dispatchers.IO) {
             for (profile in fetchedProfile) {
                 profileDao.upsert(profile)
