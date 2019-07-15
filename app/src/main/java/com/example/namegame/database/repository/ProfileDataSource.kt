@@ -11,13 +11,13 @@ import javax.inject.Singleton
 
 @Singleton
 class ProfileDataSource @Inject constructor(private val profileApi: ProfileApi) {
-    private val _downloadedProfiles = MutableLiveData<List<Profile>>()
-    val downloadedProfiles: LiveData<List<Profile>> get() = _downloadedProfiles
+    private val mutableLiveProfiles = MutableLiveData<List<Profile>>()
+    val downloadedProfiles: LiveData<List<Profile>> get() = mutableLiveProfiles
 
     suspend fun fetchProfiles() {
         try {
             val fetchedProfile = profileApi.getProfiles()
-            _downloadedProfiles.postValue(fetchedProfile)
+            mutableLiveProfiles.postValue(fetchedProfile)
         } catch (e: IOException) {
             Log.e("Error", "No internet connection", e)
         }
