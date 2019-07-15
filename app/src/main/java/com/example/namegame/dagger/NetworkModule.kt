@@ -27,12 +27,18 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(client: OkHttpClient, converterFactory: MoshiConverterFactory): Retrofit {
+    fun provideRxJava2(): RxJava2CallAdapterFactory {
+        return RxJava2CallAdapterFactory.create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(client: OkHttpClient, converterFactory: MoshiConverterFactory, adapterFactory: RxJava2CallAdapterFactory): Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(willowtreeApiBaseUrl)
             .addConverterFactory(converterFactory)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(adapterFactory)
             .build()
     }
 
