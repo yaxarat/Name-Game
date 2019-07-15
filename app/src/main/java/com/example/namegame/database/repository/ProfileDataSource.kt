@@ -15,10 +15,10 @@ class ProfileDataSource @Inject constructor(private val profileApi: ProfileApi) 
     val downloadedProfiles: LiveData<List<Profile>> get() = liveProfiles
 
     fun fetchProfiles() {
-        val disposable = profileApi.getProfiles()
-           .subscribeOn(Schedulers.io())
-           .subscribe {liveProfiles.postValue(it)}
-
-        CompositeDisposable().add(disposable)
+        CompositeDisposable().add(
+            profileApi.getProfiles()
+            .subscribeOn(Schedulers.io())
+            .subscribe {liveProfiles.postValue(it)}
+        )
     }
 }
