@@ -16,9 +16,7 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
     private var lastFetchedTime = now.minusMinutes(31)
 
     init {
-        profileDataSource.downloadedProfiles.observeForever {
-            newFetchedProfiles -> saveFetchedProfiles(newFetchedProfiles)
-        }
+        saveFetchedProfiles(profileDataSource.downloadedProfiles)
     }
 
     fun getProfiles(): Single<List<Profile>> {
@@ -31,7 +29,7 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
         return profileDao.getAllProfiles()
     }
 
-    private fun saveFetchedProfiles(fetchedProfile: List<Profile>) {
+    fun saveFetchedProfiles(fetchedProfile: List<Profile>) {
         GlobalScope.launch(Dispatchers.IO) {
             for (profile in fetchedProfile) {
                 profileDao.upsert(profile)
