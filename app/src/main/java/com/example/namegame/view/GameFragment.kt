@@ -1,19 +1,23 @@
 package com.example.namegame.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.MainApp
 import com.example.namegame.R
 import com.example.namegame.ScopedFragment
+import com.example.namegame.database.entity.Profile
 import com.example.namegame.utility.Media
 import com.example.namegame.view.viewmodel.GameViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -49,29 +53,35 @@ class GameFragment : ScopedFragment() {
             imageViewHeadshot5,
             imageViewHeadshot6
         )
-        updateUI()
+        getProfiles()
         for (n in 0 until 6) {
             imageViews[n].setOnClickListener{checkAnswer(n)}
         }
     }
 
-    private fun updateUI() = launch {
+    @SuppressLint("CheckResult")
+    private fun getProfiles() {
+        viewModel.newRound()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {profiles -> updateUI(profiles) },
+                {error -> Log.e("tag", "$error")}
+            )
+    }
+
+    private fun updateUI(profileList: List<Profile>){
+
         textViewScore.text = resources.getString(R.string.game_score, viewModel.score, viewModel.attempt)
+        progressBar.visibility = View.GONE
+        correctProfile = viewModel.answerIndex
+        val name: String = profileList[correctProfile].firstName + " " + profileList[correctProfile].lastName
 
-        viewModel.profiles.await().observe(this@GameFragment, Observer {
-            if (it.isEmpty() || it.size < 6) {
-                return@Observer
-            }
-            progressBar.visibility = View.GONE
-            correctProfile = viewModel.answerIndex
-            val name: String = it[correctProfile].firstName + " " + it[correctProfile].lastName
-
-            for (n in 0 until 6) {
-                imageViews[n].isClickable = viewModel.clickable[n]
-                updateHeadshot(imageViews[n].isClickable, n, "https:" + it[n].headshot.url)
-            }
-            textViewName.text = resources.getString(R.string.game_profile_name, name)
-        })
+        for (n in 0 until 6) {
+            imageViews[n].isClickable = viewModel.clickable[n]
+            updateHeadshot(imageViews[n].isClickable, n, "https:" + profileList[n].headshot.url)
+        }
+        textViewName.text = resources.getString(R.string.game_profile_name, name)
     }
 
     private fun checkAnswer(choice: Int) {
@@ -94,6 +104,6 @@ class GameFragment : ScopedFragment() {
 
     private fun getNewProfiles() = launch {
         viewModel.newRound()
-        updateUI()
+        getProfiles()
     }
 }

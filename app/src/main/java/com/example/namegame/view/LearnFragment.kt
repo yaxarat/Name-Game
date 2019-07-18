@@ -53,7 +53,7 @@ class LearnFragment : ScopedFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {profileList -> recyclerViewList.adapter = LearnViewAdapter(profileList)},
-                {e -> Log.e("tag", "$e")}
+                {error -> Log.e("tag", "$error")}
             )
     }
 }

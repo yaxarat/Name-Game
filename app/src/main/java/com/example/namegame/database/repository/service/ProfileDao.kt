@@ -1,7 +1,5 @@
 package com.example.namegame.database.repository.service
 
-
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,7 +13,7 @@ interface ProfileDao {
     fun upsert(profile: Profile)
 
     @Query("SELECT * FROM profiles_table WHERE id IN (SELECT id FROM profiles_table ORDER BY RANDOM() LIMIT 6)")
-    fun getSixProfiles(): LiveData<List<Profile>>
+    fun getSixProfiles(): Single<List<Profile>>
 
     @Query("SELECT * FROM profiles_table")
     fun getAllProfiles(): Single<List<Profile>>
