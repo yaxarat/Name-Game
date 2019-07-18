@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.namegame.database.entity.Profile
+import io.reactivex.Single
 
 @Dao
 interface ProfileDao {
@@ -17,5 +18,5 @@ interface ProfileDao {
     fun getSixProfiles(): LiveData<List<Profile>>
 
     @Query("SELECT * FROM profiles_table")
-    fun getAllProfiles(): LiveData<List<Profile>>
+    fun getAllProfiles(): Single<List<Profile>>
 }

@@ -3,6 +3,7 @@ package com.example.namegame.database.repository
 import androidx.lifecycle.LiveData
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.database.repository.service.ProfileDao
+import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,11 +30,8 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
         }
     }
 
-    suspend fun getAllProfiles(): LiveData<List<Profile>> {
-        return withContext(Dispatchers.IO) {
-            initProfileData()
-            return@withContext profileDao.getAllProfiles()
-        }
+    fun getAllProfiles(): Single<List<Profile>> {
+        return profileDao.getAllProfiles()
     }
 
     private fun saveFetchedProfiles(fetchedProfile: List<Profile>) {

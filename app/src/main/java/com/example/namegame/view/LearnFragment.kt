@@ -1,11 +1,12 @@
 package com.example.namegame.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.MainApp
 import com.example.namegame.R
@@ -13,8 +14,9 @@ import com.example.namegame.ScopedFragment
 import com.example.namegame.view.adapter.LearnViewAdapter
 import com.example.namegame.view.viewmodel.LearnViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_learn.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LearnFragment : ScopedFragment() {
@@ -44,9 +46,14 @@ class LearnFragment : ScopedFragment() {
         updateUI()
     }
 
-    private fun updateUI() = launch {
-        viewModel.profiles.await().observe(this@LearnFragment, Observer {
-            recyclerViewList.adapter = LearnViewAdapter(it)
-        })
+    @SuppressLint("CheckResult")
+    private fun updateUI() {
+        viewModel.getAllProfiles()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {profileList -> recyclerViewList.adapter = LearnViewAdapter(profileList)},
+                {e -> Log.e("tag", "$e")}
+            )
     }
 }
