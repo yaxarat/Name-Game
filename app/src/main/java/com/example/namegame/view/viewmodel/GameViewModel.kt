@@ -11,10 +11,6 @@ class GameViewModel (private val profileRepository: ProfileRepository) : ViewMod
     var score = 0
     var attempt = 0
 
-    init {
-        newRound()
-    }
-
     fun newRound(): Single<List<Profile>> {
         answerIndex = (0 .. 5).random()
         clickable.fill(true)

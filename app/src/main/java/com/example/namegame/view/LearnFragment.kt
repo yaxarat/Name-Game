@@ -7,10 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.MainApp
 import com.example.namegame.R
-import com.example.namegame.ScopedFragment
 import com.example.namegame.view.adapter.LearnViewAdapter
 import com.example.namegame.view.viewmodel.LearnViewModel
 import com.example.namegame.view.viewmodel.ViewModelFactory
@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_learn.*
 import javax.inject.Inject
 
-class LearnFragment : ScopedFragment() {
+class LearnFragment : Fragment() {
     private lateinit var viewModel: LearnViewModel
     @Inject lateinit var viewModelFactory: ViewModelFactory
 

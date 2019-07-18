@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.namegame.MainApp
 import com.example.namegame.R
-import com.example.namegame.ScopedFragment
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.utility.Media
 import com.example.namegame.view.viewmodel.GameViewModel
@@ -19,10 +19,9 @@ import com.example.namegame.view.viewmodel.ViewModelFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_game.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class GameFragment : ScopedFragment() {
+class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
     @Inject lateinit var viewModelFactory: ViewModelFactory
@@ -53,14 +52,14 @@ class GameFragment : ScopedFragment() {
             imageViewHeadshot5,
             imageViewHeadshot6
         )
-        getProfiles()
+        getNewProfiles()
         for (n in 0 until 6) {
             imageViews[n].setOnClickListener{checkAnswer(n)}
         }
     }
 
     @SuppressLint("CheckResult")
-    private fun getProfiles() {
+    private fun getNewProfiles() {
         viewModel.newRound()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -100,10 +99,5 @@ class GameFragment : ScopedFragment() {
 
     private fun updateHeadshot(correct: Boolean, index: Int, src: String) {
         Media.loadImageFromSource(if (correct) src else R.drawable.ic_close, imageViews[index], this@GameFragment.requireContext())
-    }
-
-    private fun getNewProfiles() = launch {
-        viewModel.newRound()
-        getProfiles()
     }
 }
