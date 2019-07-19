@@ -13,13 +13,13 @@ import javax.inject.Singleton
 @Singleton
 class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, private  val profileDataSource: ProfileDataSource) {
 
+
     fun fetchProfiles() {
         profileDataSource.downloadedProfilesObservable
             .subscribeOn(Schedulers.io())
             .subscribe(
-                {newFetchedProfiles -> saveFetchedProfiles(Single.just(newFetchedProfiles))},
-                {Log.e("tag", "Could not fetch new profiles")}
-            )
+                {fetchedProfiles -> saveFetchedProfiles(Single.just(fetchedProfiles))},
+                {throwable -> Log.e("tag", "Could not fetch new profiles: $throwable")})
     }
 
     fun getProfiles(): Single<List<Profile>> {
@@ -30,9 +30,9 @@ class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, 
         return profileDao.getAllProfiles()
     }
 
-    private fun saveFetchedProfiles(fetchedProfile: Single<List<Profile>>) {
-        fetchedProfile
+    private fun saveFetchedProfiles(fetchedProfiles: Single<List<Profile>>) {
+        fetchedProfiles
             .subscribeOn(Schedulers.io())
-            .subscribe { profiles -> for (profile in profiles) { profileDao.upsert(profile) }}
+            .subscribe { profiles -> for (profile in profiles) { profileDao.insert(profile) }}
     }
 }

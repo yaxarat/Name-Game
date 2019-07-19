@@ -17,6 +17,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_learn.*
 import javax.inject.Inject
 
+@SuppressLint("CheckResult")
 class LearnFragment @Inject constructor(private val viewModelFactory: ViewModelFactory) : Fragment() {
     private lateinit var viewModel: LearnViewModel
 
@@ -38,7 +39,6 @@ class LearnFragment @Inject constructor(private val viewModelFactory: ViewModelF
         updateUI()
     }
 
-    @SuppressLint("CheckResult")
     private fun updateUI() {
         viewModel.getAllProfiles()
             .subscribeOn(Schedulers.io())

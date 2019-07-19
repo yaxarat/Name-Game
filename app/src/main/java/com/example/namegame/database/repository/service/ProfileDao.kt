@@ -10,7 +10,7 @@ import io.reactivex.Single
 @Dao
 interface ProfileDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun upsert(profile: Profile)
+    fun insert(profile: Profile)
 
     @Query("SELECT * FROM profiles_table WHERE id IN (SELECT id FROM profiles_table ORDER BY RANDOM() LIMIT 6)")
     fun getSixProfiles(): Single<List<Profile>>

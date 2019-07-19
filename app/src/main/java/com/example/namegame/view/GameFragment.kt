@@ -19,6 +19,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_game.*
 import javax.inject.Inject
 
+@SuppressLint("CheckResult")
 class GameFragment @Inject constructor(private val viewModelFactory: ViewModelFactory) : Fragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
@@ -50,7 +51,6 @@ class GameFragment @Inject constructor(private val viewModelFactory: ViewModelFa
         }
     }
 
-    @SuppressLint("CheckResult")
     private fun getNewProfiles() {
         viewModel.newRound()
             .subscribeOn(Schedulers.io())
