@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @Singleton
 class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, private  val profileDataSource: ProfileDataSource) {
 
-
     fun fetchProfiles() {
         profileDataSource.downloadedProfilesObservable
             .subscribeOn(Schedulers.io())

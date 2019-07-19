@@ -1,6 +1,7 @@
 package com.example.namegame.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.namegame.MainApp
 import com.example.namegame.R
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.utility.Media
@@ -20,10 +22,16 @@ import kotlinx.android.synthetic.main.fragment_game.*
 import javax.inject.Inject
 
 @SuppressLint("CheckResult")
-class GameFragment @Inject constructor(private val viewModelFactory: ViewModelFactory) : Fragment() {
+class GameFragment: Fragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var imageViews: Array<ImageView>
+    @Inject lateinit var viewModelFactory: ViewModelFactory
     private var correctProfile = 0
+
+    override fun onAttach(context: Context) {
+        MainApp.application.appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
