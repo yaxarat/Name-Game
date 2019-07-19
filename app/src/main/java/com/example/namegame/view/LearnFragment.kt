@@ -1,7 +1,6 @@
 package com.example.namegame.view
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.namegame.MainApp
 import com.example.namegame.R
 import com.example.namegame.view.adapter.LearnViewAdapter
 import com.example.namegame.view.viewmodel.LearnViewModel
@@ -19,14 +17,8 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_learn.*
 import javax.inject.Inject
 
-class LearnFragment : Fragment() {
+class LearnFragment @Inject constructor(private val viewModelFactory: ViewModelFactory) : Fragment() {
     private lateinit var viewModel: LearnViewModel
-    @Inject lateinit var viewModelFactory: ViewModelFactory
-
-    override fun onAttach(context: Context) {
-        MainApp.application.appComponent.inject(this)
-        super.onAttach(context)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

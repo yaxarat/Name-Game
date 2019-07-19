@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.namegame.dagger.AppComponent
 import com.example.namegame.dagger.AppModule
 import com.example.namegame.dagger.DaggerAppComponent
-import com.jakewharton.threetenabp.AndroidThreeTen
 
 class MainApp : Application() {
     lateinit var appComponent: AppComponent
@@ -20,7 +19,5 @@ class MainApp : Application() {
             DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .build()
-
-        AndroidThreeTen.init(this)
     }
 }

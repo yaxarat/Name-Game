@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.namegame.R
+import com.example.namegame.database.repository.ProfileRepository
 import com.example.namegame.utility.FragmentTransaction
 import com.example.namegame.utility.Network
 import kotlinx.android.synthetic.main.fragment_menu.*
+import javax.inject.Inject
 
-class MenuFragment : Fragment() {
+class MenuFragment @Inject constructor(private val learnFragment: LearnFragment, private val gameFragment: GameFragment,
+                                       private val settingFragment: SettingFragment, private val profileRepository: ProfileRepository): Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_menu, container, false)
@@ -20,14 +23,16 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        profileRepository.fetchProfiles()
+
         start_button.setOnClickListener {
-            beginTransactionTo(GameFragment())
+            beginTransactionTo(gameFragment)
         }
         learn_button.setOnClickListener {
-            beginTransactionTo(LearnFragment())
+            beginTransactionTo(learnFragment)
         }
         setting_button.setOnClickListener {
-            FragmentTransaction.beginTransactionWithBackStack(activity, R.id.host_fragment, SettingFragment())
+            FragmentTransaction.beginTransactionWithBackStack(activity, R.id.host_fragment, settingFragment)
         }
     }
 

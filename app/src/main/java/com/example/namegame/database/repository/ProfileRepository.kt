@@ -1,48 +1,38 @@
 package com.example.namegame.database.repository
 
+import android.annotation.SuppressLint
+import android.util.Log
 import com.example.namegame.database.entity.Profile
 import com.example.namegame.database.repository.service.ProfileDao
 import io.reactivex.Single
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.time.ZonedDateTime
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@SuppressLint("CheckResult")
 @Singleton
-class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, private val profileDataSource: ProfileDataSource) {
-    private var now = ZonedDateTime.now()
-    private var lastFetchedTime = now.minusMinutes(31)
+class ProfileRepository @Inject constructor(private val profileDao: ProfileDao, private  val profileDataSource: ProfileDataSource) {
 
-    init {
-        profileDataSource.downloadedProfiles.observeForever {
-                newFetchedProfiles -> saveFetchedProfiles(newFetchedProfiles)
-        }
+    fun fetchProfiles() {
+        profileDataSource.downloadedProfilesObservable
+            .subscribeOn(Schedulers.io())
+            .subscribe(
+                {newFetchedProfiles -> saveFetchedProfiles(Single.just(newFetchedProfiles))},
+                {Log.e("tag", "Could not fetch new profiles")}
+            )
     }
 
     fun getProfiles(): Single<List<Profile>> {
-        initProfileData()
         return profileDao.getSixProfiles()
     }
 
     fun getAllProfiles(): Single<List<Profile>> {
-        initProfileData()
         return profileDao.getAllProfiles()
     }
 
-    private fun saveFetchedProfiles(fetchedProfile: List<Profile>) {
-        GlobalScope.launch(Dispatchers.IO) {
-            for (profile in fetchedProfile) {
-                profileDao.upsert(profile)
-            }
-        }
-    }
-
-    private fun initProfileData() {
-        if (lastFetchedTime.isBefore(now.minusMinutes(30))) {
-            lastFetchedTime = now
-            profileDataSource.fetchProfiles()
-        }
+    private fun saveFetchedProfiles(fetchedProfile: Single<List<Profile>>) {
+        fetchedProfile
+            .subscribeOn(Schedulers.io())
+            .subscribe { profiles -> for (profile in profiles) { profileDao.upsert(profile) }}
     }
 }

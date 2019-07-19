@@ -1,8 +1,8 @@
 package com.example.namegame.view
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.namegame.MainApp
 import com.example.namegame.R
 import com.example.namegame.database.shared_preference.Preference
@@ -11,6 +11,7 @@ import com.example.namegame.utility.Permission
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(){
+    @Inject lateinit var  menuFragment: MenuFragment
     @Inject lateinit var app: Application
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity(){
 
         //  using the same Fragment rather than recreating a new one
         if (savedInstanceState == null) {
-            FragmentTransaction.beginTransaction(this, R.id.host_fragment, MenuFragment())
+            FragmentTransaction.beginTransaction(this, R.id.host_fragment, menuFragment)
         }
     }
 
