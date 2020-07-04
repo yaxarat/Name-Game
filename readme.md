@@ -23,7 +23,6 @@ Dark mode is a must have for any application these days. You can toggle it on by
 <img src="./screenshots/list_dark.png" width="300">
 
 ## Libraries
-- - - -
 This is also a great application to take a look at how many of the modern android component/libraries are used in a relatively simple application.
 The technology stack used are:
 * Jetpack Navigation Architecture
